@@ -16,7 +16,12 @@ export default async function NoticesPage() {
 
       {notices.length === 0 ? (
         <div className="text-center py-20 bg-white rounded-2xl border">
-          <div className="text-5xl mb-4">📢</div>
+          <div className="inline-flex items-center justify-center w-14 h-14 bg-gray-100 rounded-2xl mb-4">
+            <svg className="w-7 h-7 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 11l18-5v12L3 14v-3z" />
+              <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" />
+            </svg>
+          </div>
           <h3 className="text-xl font-bold text-gray-900 mb-2">
             등록된 공지사항이 없습니다
           </h3>
@@ -30,8 +35,11 @@ export default async function NoticesPage() {
             >
               <div className="flex items-center gap-2 mb-2">
                 {n.isPinned && (
-                  <span className="bg-red-100 text-red-700 px-2 py-0.5 rounded text-xs font-medium">
-                    📌 고정
+                  <span className="bg-red-100 text-red-700 px-2 py-0.5 rounded text-xs font-medium inline-flex items-center gap-1">
+                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 17v5M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z" />
+                    </svg>
+                    고정
                   </span>
                 )}
                 <span className="text-xs text-gray-400">

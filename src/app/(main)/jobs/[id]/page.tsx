@@ -90,7 +90,15 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
             <h3 className="font-bold text-lg">{job.company.companyName}</h3>
             {job.company.industry && <p className="text-sm text-orange-600 mt-1">{job.company.industry}</p>}
             {job.company.description && <p className="text-gray-600 mt-2">{job.company.description}</p>}
-            {job.company.address && <p className="text-sm text-gray-500 mt-2">📍 {job.company.address}</p>}
+            {job.company.address && (
+              <p className="text-sm text-gray-500 mt-2 inline-flex items-center gap-1">
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                {job.company.address}
+              </p>
+            )}
           </div>
         </div>
 

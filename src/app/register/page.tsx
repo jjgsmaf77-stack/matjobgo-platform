@@ -17,10 +17,13 @@ function RegisterForm() {
   const defaultRole = searchParams.get("role") === "company" ? "COMPANY" : "STUDENT";
 
   const [role, setRole] = useState<"STUDENT" | "COMPANY">(defaultRole as any);
+  const [studentType, setStudentType] = useState<"HIGH_SCHOOL" | "UNIVERSITY">(
+    "HIGH_SCHOOL"
+  );
   const [formData, setFormData] = useState({
     email: "", password: "", passwordConfirm: "", name: "", phone: "",
     // 학생
-    school: "", grade: "", desiredField: [] as string[],
+    school: "", grade: "", major: "", desiredField: [] as string[],
     // 기업
     companyName: "", businessNumber: "", industry: "", address: "", description: "",
   });
@@ -61,6 +64,7 @@ function RegisterForm() {
         body: JSON.stringify({
           ...formData,
           role,
+          studentType: role === "STUDENT" ? studentType : undefined,
           desiredField: JSON.stringify(formData.desiredField),
         }),
       });
@@ -99,25 +103,31 @@ function RegisterForm() {
           <button
             type="button"
             onClick={() => setRole("STUDENT")}
-            className={`flex-1 py-4 rounded-xl font-bold text-center border-2 transition ${
+            className={`flex-1 py-4 rounded-xl font-bold text-center border-2 transition flex flex-col items-center gap-1.5 ${
               role === "STUDENT"
                 ? "border-orange-600 bg-orange-50 text-orange-700"
                 : "border-gray-200 bg-white text-gray-500 hover:border-gray-300"
             }`}
           >
-            <div className="text-2xl mb-1">🎓</div>
-            학생(직업계고)
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
+              <path d="M22 10v6M6 12.5V16c3.5 2 8.5 2 12 0v-3.5M2 10l10-5 10 5-10 5z" />
+            </svg>
+            학생
           </button>
           <button
             type="button"
             onClick={() => setRole("COMPANY")}
-            className={`flex-1 py-4 rounded-xl font-bold text-center border-2 transition ${
+            className={`flex-1 py-4 rounded-xl font-bold text-center border-2 transition flex flex-col items-center gap-1.5 ${
               role === "COMPANY"
                 ? "border-orange-600 bg-orange-50 text-orange-700"
                 : "border-gray-200 bg-white text-gray-500 hover:border-gray-300"
             }`}
           >
-            <div className="text-2xl mb-1">🏢</div>
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
+              <rect x="4" y="2" width="16" height="20" rx="2" />
+              <line x1="9" y1="22" x2="9" y2="18" />
+              <line x1="15" y1="22" x2="15" y2="18" />
+            </svg>
             기업(외식업체)
           </button>
         </div>
@@ -165,13 +175,43 @@ function RegisterForm() {
           {role === "STUDENT" && (
             <div className="space-y-4 pt-4 border-t">
               <h3 className="font-bold text-gray-900">학생 정보</h3>
+              <div className="flex gap-2">
+                <button type="button"
+                  onClick={() => setStudentType("HIGH_SCHOOL")}
+                  className={`flex-1 py-3 rounded-xl text-sm font-semibold border-2 transition ${
+                    studentType === "HIGH_SCHOOL"
+                      ? "border-orange-600 bg-orange-50 text-orange-700"
+                      : "border-gray-200 bg-white text-gray-500 hover:border-gray-300"
+                  }`}>
+                  고등학생 (직업계고)
+                </button>
+                <button type="button"
+                  onClick={() => setStudentType("UNIVERSITY")}
+                  className={`flex-1 py-3 rounded-xl text-sm font-semibold border-2 transition ${
+                    studentType === "UNIVERSITY"
+                      ? "border-orange-600 bg-orange-50 text-orange-700"
+                      : "border-gray-200 bg-white text-gray-500 hover:border-gray-300"
+                  }`}>
+                  대학생 (호원대)
+                </button>
+              </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">소속 고등학교 *</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    {studentType === "UNIVERSITY" ? "소속 대학교" : "소속 고등학교"} *
+                  </label>
                   <input name="school" value={formData.school} onChange={handleChange} required
                     className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
-                    placeholder="예: 진경여자고등학교" />
+                    placeholder={studentType === "UNIVERSITY" ? "예: 호원대학교" : "예: 진경여자고등학교"} />
                 </div>
+                {studentType === "UNIVERSITY" && (
+                  <div className="col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">전공</label>
+                    <input name="major" value={formData.major} onChange={handleChange}
+                      className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+                      placeholder="예: 호텔조리학과" />
+                  </div>
+                )}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">학년</label>
                   <select name="grade" value={formData.grade} onChange={handleChange}
@@ -180,6 +220,7 @@ function RegisterForm() {
                     <option value="1">1학년</option>
                     <option value="2">2학년</option>
                     <option value="3">3학년</option>
+                    {studentType === "UNIVERSITY" && <option value="4">4학년</option>}
                     <option value="졸업">졸업</option>
                   </select>
                 </div>

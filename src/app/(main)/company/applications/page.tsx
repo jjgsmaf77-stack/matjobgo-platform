@@ -28,7 +28,12 @@ export default async function CompanyApplicationsPage() {
 
       {applications.length === 0 ? (
         <div className="text-center py-20 bg-white rounded-2xl border">
-          <div className="text-5xl mb-4">📨</div>
+          <div className="inline-flex items-center justify-center w-14 h-14 bg-gray-100 rounded-2xl mb-4">
+            <svg className="w-7 h-7 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          </div>
           <h3 className="text-xl font-bold text-gray-900 mb-2">
             아직 지원자가 없습니다
           </h3>

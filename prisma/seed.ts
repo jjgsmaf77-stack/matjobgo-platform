@@ -754,12 +754,267 @@ async function main() {
     await prisma.program.create({ data: p });
   }
 
+  // ==================== 대학생 (맛담용) ====================
+  const univPassword = await bcryptjs.hash("univ1234", 12);
+  const univStudentsData = [
+    {
+      email: "univ1@howon.ac.kr", name: "오지호", phone: "010-9001-0001",
+      school: "호원대학교", grade: "3", major: "호텔조리학과",
+      isMentor: true,
+      introduction: "3학년 호텔조리학과 재학 중. 양식 파트너쉽 전공. 전주 비스트로에서 파트타임.",
+      desiredField: ["양식", "퓨전요리"], desiredLocation: "전주",
+      skills: "양식조리기능사, 조리산업기사", experience: "On-D-Gourmet 조교 2학기",
+    },
+    {
+      email: "univ2@howon.ac.kr", name: "김서진", phone: "010-9001-0002",
+      school: "호원대학교", grade: "4", major: "호텔조리학과",
+      isMentor: true,
+      introduction: "4학년, 제과제빵 전공. PNB풍년제과 인턴 수료. 창업 준비 중.",
+      desiredField: ["제과제빵", "카페·베이커리"], desiredLocation: "전주",
+      skills: "제과·제빵기능사, 바리스타 1급", experience: "PNB풍년제과 인턴 3개월",
+    },
+    {
+      email: "univ3@howon.ac.kr", name: "문예린", phone: "010-9001-0003",
+      school: "호원대학교", grade: "2", major: "호텔조리학과",
+      isMentor: false,
+      introduction: "2학년 재학. 한식 집중 중이며, 지역 향토음식에 관심 많음.",
+      desiredField: ["한식"], desiredLocation: "전주, 익산",
+      skills: "한식조리기능사", experience: "조리융합캠프 보조강사",
+    },
+  ];
+
+  for (const s of univStudentsData) {
+    await prisma.user.upsert({
+      where: { email: s.email },
+      update: {},
+      create: {
+        email: s.email, password: univPassword, name: s.name,
+        role: "STUDENT", phone: s.phone,
+        student: {
+          create: {
+            studentType: "UNIVERSITY",
+            school: s.school, grade: s.grade, major: s.major,
+            isMentor: s.isMentor, introduction: s.introduction,
+            desiredField: JSON.stringify(s.desiredField),
+            desiredLocation: s.desiredLocation,
+            skills: s.skills, experience: s.experience,
+          },
+        },
+      },
+    });
+  }
+
+  // ==================== 맛담 샘플 게시글 ====================
+  await prisma.comment.deleteMany({});
+  await prisma.postLike.deleteMany({});
+  await prisma.bookmark.deleteMany({});
+  await prisma.post.deleteMany({});
+
+  const authorIdFor = async (email: string) => {
+    const u = await prisma.user.findUnique({ where: { email } });
+    return u?.id;
+  };
+
+  const idStudent1 = await authorIdFor("student1@test.com");
+  const idStudent2 = await authorIdFor("student2@test.com");
+  const idStudent4 = await authorIdFor("student4@test.com");
+  const idStudent6 = await authorIdFor("student6@test.com");
+  const idStudent8 = await authorIdFor("student8@test.com");
+  const idUniv1 = await authorIdFor("univ1@howon.ac.kr");
+  const idUniv2 = await authorIdFor("univ2@howon.ac.kr");
+  const idUniv3 = await authorIdFor("univ3@howon.ac.kr");
+  const idAdmin = admin.id;
+
+  const postsData: Array<{
+    authorId: string | undefined;
+    category: string;
+    title: string;
+    content: string;
+    tags?: string[];
+    isPinned?: boolean;
+    isMentorAnswer?: boolean;
+    createdAt?: Date;
+  }> = [
+    {
+      authorId: idAdmin,
+      category: "PROGRAM",
+      title: "🎉 맛담 커뮤니티가 열렸습니다!",
+      content: "안녕하세요, 맛JobGO 운영진입니다.\n\n고등학생과 대학생이 함께 이야기를 나누는 공간, **맛담(MatDam)** 이 오픈했습니다.\n\n- 학습경험, 프로그램 후기, 교육과정, 사회공헌, 진로고민, 노하우, 레시피 7개 카테고리로 자유롭게 글을 작성할 수 있습니다.\n- 대학생(호원대 호텔조리학과) 선배들이 **멘토**로 참여해 진로 고민에 답변해 드립니다.\n- 친구·선배에게 궁금한 게 있다면 언제든지 글을 남겨주세요.\n\n맛담에서 나눈 이야기가 모여 전북 조리 인재의 내일을 만듭니다.",
+      tags: ["공지", "오픈"], isPinned: true,
+    },
+    {
+      authorId: idUniv1,
+      category: "CAREER",
+      title: "직업계고에서 호원대 호텔조리학과로 진학한 후기",
+      content: "덕암정보고 → 호원대 호텔조리학과로 진학한 지 3년차입니다.\n\n**직업계고 때 잘한 것**\n- 한식·양식 조리기능사 2개 이상 취득: 대학 공부의 기초가 됨\n- 교내 요리대회 꾸준히 출전: 포트폴리오가 됨\n- 전북 식재료에 익숙해진 것\n\n**대학에서 배우는 것**\n- 영양학, 식품위생학 같은 이론 비중이 높음\n- 양식 마스터 스테이지 실습 집중\n- 외식창업·메뉴 기획 같은 경영 마인드\n\n**학비 부담?**\n- RISE 사업 특별전형으로 1학년 50% 감면 받았어요\n- 근로장학, 국가장학금 병행\n\n궁금한 거 댓글 남겨주세요. 아는 선에서 답변드릴게요 🙌",
+      tags: ["진학", "호원대", "호텔조리학과", "멘토"],
+      isMentorAnswer: true,
+    },
+    {
+      authorId: idStudent2,
+      category: "PROGRAM",
+      title: "On-D-Gourmet 카페·베이커리 과정 솔직 후기",
+      content: "덕암정보고 3학년 이서연입니다!\n\n7월에 참여한 On-D-Gourmet 카페·베이커리 과정 후기 남겨요.\n\n**좋았던 점**\n- PNB풍년제과 셰프님이 직접 초코파이 레시피 전수 🎂\n- 재료비 · 조리복 전액 지원 (진짜 부담 없음)\n- 호원대 새 제과실이 정말 깨끗함\n- 수료증 덕분에 수시 특별전형 준비에 도움\n\n**아쉬웠던 점**\n- 5일이 너무 짧아요, 조금 더 길었으면\n- 개인별 피드백 시간이 더 많았으면 좋겠음\n\n2차는 양식조리 + 사퀴테리인데 신청해봤어요. 주변에 고민하는 친구들 꼭 신청해보세요!",
+      tags: ["OnDGourmet", "제과제빵", "후기"],
+    },
+    {
+      authorId: idStudent1,
+      category: "TIP",
+      title: "한식조리기능사 실기 3주 단기 합격 루틴",
+      content: "진경여고 3학년 김민수입니다.\n\n이번 봄 한식조리기능사 실기 붙고 단기 팁 공유합니다.\n\n**주 1주차**\n- 전체 과제 영상 한번씩 시청 (감 잡기)\n- 도마·칼·냄비 위치 손에 익히기\n- 계량 감각 잡기 (물 200ml, 간장 15ml 등)\n\n**2주차**\n- 매일 2개 과제 연습 (타이머 무조건 켜고)\n- 채소 썰기 정확도 / 간 맞추기 집중\n\n**3주차**\n- 취약 과제 2~3개 집중 반복\n- 실전처럼 모의고사 (60분 2과제)\n\n**시험 당일**\n- 전 과제 이미지 트레이닝으로 한번 훑기\n- 칼 끝 상태 체크!\n\n한식 난이도 체감: ★★★☆☆ (꼼꼼함만 있으면 충분)",
+      tags: ["자격증", "한식조리기능사", "실기"],
+    },
+    {
+      authorId: idStudent4,
+      category: "CAREER",
+      title: "남원에 남아서 조리사 하는 게 맞을까요?",
+      content: "남원제일고 3학년 정지우입니다.\n\n남원 추어탕 명가에서 일하고 싶은데, 주변에서는 \"젊은데 서울 가야 하는 거 아니냐\"고 해요.\n\n지역에서 조리사 시작해도 괜찮을지, 커리어에 불리하진 않을지 고민됩니다.\n\n- 지역에 남고 싶은 이유: 가족, 남원 식재료와 향토음식에 진심\n- 걱정: 기술 업그레이드 기회, 급여, 커리어 정체\n\n선배님들 의견 듣고 싶어요 🙏",
+      tags: ["진로", "지역정주", "남원"],
+    },
+    {
+      authorId: idUniv1,
+      category: "CAREER",
+      title: "Re: 지역에서 시작하는 조리사도 충분히 경쟁력 있어요",
+      content: "@정지우 학생 글 잘 읽었습니다.\n\n3학년 선배로서 제 의견 드릴게요.\n\n**지역에서 시작해도 전혀 불리하지 않아요.**\n- 향토음식 전문성은 오히려 희소 가치예요\n- 남원 추어탕처럼 **브랜드 파워 있는 노포**에서 시작하면 레퍼런스가 됨\n- 최근 트렌드는 **로컬 식재료 + 모던 기법** 조합 (베지근 같은 곳)\n\n**주의할 점**\n- 첫 직장에서 \"단순 반복\"에만 머무르지 말기 (기술 성장)\n- 주 1회라도 외부 워크숍 · SNS · 독서로 최신 트렌드 흡수\n- 3년 지나면 한 번쯤 **서울·해외 스테이지**도 경험 권장\n\n**급여**: 지역 노포도 최근 많이 올랐어요. 추어향은 제가 알기로 220~260만원 수준.\n\n남원에 남고 싶다는 마음이 가장 중요합니다. 그 마음이 장기근속 → 실력 누적으로 이어져요. 응원할게요!",
+      tags: ["멘토답변", "지역정주", "커리어"],
+      isMentorAnswer: true,
+    },
+    {
+      authorId: idStudent6,
+      category: "LEARNING",
+      title: "양식 실습 첫날 - 생각보다 훨씬 빡세요",
+      content: "진경여고 3학년 윤하은입니다.\n\nOn-D-Gourmet 2차 양식조리 1일차 다녀왔어요.\n\n느낀 점:\n- 양식은 **소스**가 반이에요. 모체 소스 5개 외우기부터 시작\n- 계량이 한식보다 훨씬 엄격 (g · ml 단위)\n- 팬 잡는 법, 스톡 끓이는 시간, 다 디테일이 있음\n\n첫 요리로 미르푸아(mirepoix) 만들고, 치킨 스톡을 4시간 끓였어요.\n\n처음엔 \"양식 쉬울 줄 알았는데…\" 했다가 완전 겸손해졌습니다 😅\n\n5일 뒤가 벌써 기다려져요. 같이 참여한 친구들 화이팅!",
+      tags: ["양식", "OnDGourmet", "실습"],
+    },
+    {
+      authorId: idUniv2,
+      category: "TIP",
+      title: "제과제빵 혼자 연습할 때 추천하는 순서 (예산 최소화)",
+      content: "호원대 4학년, 제과제빵 전공 김서진입니다.\n\n집에서 연습할 때 \"뭘 사야 하지?\" 막막한 후배들이 많아서 정리해봤어요.\n\n**최소 장비 (5만원대)**\n- 디지털 저울 (1g 단위)\n- 실리콘 스크레이퍼 2종\n- 스텐 볼 2개 (큰/작은)\n- 180도 오븐온도계\n\n**재료 최소 세트 (2만원)**\n- 박력/강력 밀가루\n- 설탕, 소금, 버터, 계란, 우유\n- 이스트, 베이킹파우더\n\n**추천 연습 순서 (각 2회씩)**\n1. 스콘 (실패해도 맛있음 ✨)\n2. 마들렌\n3. 쿠키 4종 (버터·초코·오트밀·마카롱 베이스)\n4. 파운드 케이크\n5. 호두 브라우니\n6. 식빵 (이스트 컨트롤 경험)\n7. 크림빵 (발효 + 충전)\n\n위 순서로 하면 제빵기능사 실기도 자연스럽게 준비돼요. 응원합니다!",
+      tags: ["제과제빵", "혼공", "자격증"],
+      isMentorAnswer: true,
+    },
+    {
+      authorId: idStudent8,
+      category: "RECIPE",
+      title: "집에서 만든 전주식 치즈 단팥빵 레시피",
+      content: "덕암정보고 3학년 한소영입니다.\n\n이성당 단팥빵에 영감 받아서 만든 레시피예요. 전주 맛을 담아보고 싶어서 임실 치즈를 넣어봤습니다.\n\n**재료 (6개 분량)**\n- 강력분 250g, 설탕 40g, 소금 3g\n- 이스트 5g, 우유 150g, 계란 1개, 버터 30g\n- 팥앙금 300g (시판), 임실 모짜렐라 치즈 120g\n\n**과정**\n1. 우유 40도 데워 이스트 풀기 → 밀가루/설탕/소금/계란과 반죽 10분\n2. 버터 추가 후 다시 8분 반죽 (윤기 나게)\n3. 1차 발효 40분 (2배 부피)\n4. 6분할 후 둥글리기, 20분 휴지\n5. 팥앙금 + 치즈 한 조각씩 넣고 성형\n6. 2차 발효 30분\n7. 180도 오븐 12~14분\n\n**포인트**\n- 팥이랑 치즈가 만나면 단짠이 대박이에요\n- 식으면 토스터에 30초 돌리면 치즈가 다시 녹아서 더 맛있음 🔥\n\n레시피 공유 환영!",
+      tags: ["레시피", "제과제빵", "치즈단팥빵", "임실치즈"],
+    },
+    {
+      authorId: idStudent1,
+      category: "VOLUNTEER",
+      title: "진경여고 김장봉사활동 다녀왔어요",
+      content: "12월 5일 진경여자고등학교 김장봉사 참여 후기입니다.\n\n- 참여 인원: 우리 학교 30명\n- 김치: 약 200포기\n- 지원 가구: 완산구 독거 어르신 20가구\n\n새벽 6시 등교가 힘들긴 했지만, 어르신들 댁 전달하고 인사드릴 때 진짜 뿌듯했어요.\n\n학교 조리 실습실에서 배운 칼질이 실전에서 이렇게 빛날 줄 몰랐네요 😊\n\n2차년도 때 더 많은 학교가 함께했으면 좋겠어요.\n\n사진은 맛JobGO 갤러리에도 올라올 예정이라고 합니다!",
+      tags: ["김장봉사", "사회공헌", "진경여고"],
+    },
+    {
+      authorId: idStudent2,
+      category: "VOLUNTEER",
+      title: "덕암정보고 김장봉사 - 처음이지만 가장 기억에 남아요",
+      content: "덕암정보고 3학년 이서연입니다.\n\n12월 10일 김장봉사 2차 참여했어요. 첫 봉사활동이라 긴장했지만,\n\n- 선생님들과 호원대 선배들이 채소 손질·양념 베이스 미리 준비해주셔서 어려움 없었어요\n- 군산 지역 20가구 중 우리 조는 4가구 담당\n- 손주 같다며 눈물 보이시던 할머니 계셔서 저도 울컥 🥺\n\n앞으로 졸업하고 취업해도 이런 봉사는 계속 이어가고 싶어요. 지역에 남아야겠다는 마음이 더 확실해졌습니다.\n\n후배 친구들에게도 강추!",
+      tags: ["김장봉사", "군산", "덕암정보고"],
+    },
+    {
+      authorId: idUniv3,
+      category: "CURRICULUM",
+      title: "호원대 호텔조리학과 커리큘럼 한눈에 보기 (2학년 기준)",
+      content: "호원대 호텔조리학과 2학년 재학 중인 문예린입니다.\n\n직업계고 후배들이 궁금해할 것 같아서 정리해요.\n\n**1학년 - 기초 다지기**\n- 조리학개론, 식품학, 영양학\n- 한식 / 양식 / 중식 / 일식 기본 실습\n- 위생관리, 식재료학\n\n**2학년 - 전공 심화**\n- 한식조리 심화, 양식 소스·스톡, 제과제빵 1\n- 외식서비스경영론, 메뉴기획\n- 실습: 학교 실습 레스토랑 서비스 로테이션\n\n**3학년 - 특성화**\n- 전공 선택 (양식/한식/제과제빵/소믈리에 中)\n- 외식창업, 푸드스타일링\n- On-D-Gourmet 조교 또는 전공 심화 실습\n\n**4학년 - 현장 연계**\n- 3~6개월 현장 실습 (협력 업체 선택)\n- 캡스톤 디자인 (창업 프로젝트 or 메뉴 개발)\n- 졸업 포트폴리오\n\n자격증은 1~2학년에 한·양식 다 따두는 걸 권장해요. 3학년부터는 실습 업체 일정이 꽉 차서 시간 없어요 😅",
+      tags: ["호원대", "호텔조리학과", "커리큘럼"],
+    },
+    {
+      authorId: idAdmin,
+      category: "PROGRAM",
+      title: "[모집] On-D-Gourmet 2차 양식조리 & 사퀴테리 참가자",
+      content: "2026년 5~6월 중 진행되는 On-D-Gourmet 2차 과정 모집 안내입니다.\n\n- 대상: 전북 직업계고 재학생 30명\n- 내용: 양식 기본기 + 사퀴테리 제조 + 로컬 식재료 활용\n- 지원: 조리복, 재료비, 보험, 교통비 (전액 무료)\n- 장소: 호원대 서양식 실습실\n- 신청: 소속 학교 담임교사 경유\n\n수료 시 비스트로 전주 등 협력 업체 채용 가점 + 호원대 수시 특별전형 가산점이 있습니다.\n\n관심 있는 학생·학부모님 많이 신청 부탁드립니다!",
+      tags: ["OnDGourmet", "모집", "2026"],
+      isPinned: true,
+    },
+    {
+      authorId: idStudent4,
+      category: "LEARNING",
+      title: "남원 추어탕 레시피를 학교 수업에서 배웠어요",
+      content: "남원제일고 정지우입니다.\n\n이번 주 학교 실습 수업에서 지역 향토음식 특집으로 **남원 추어탕** 만들었어요.\n\n선생님이 알려주신 핵심:\n- **미꾸라지 손질**: 굵은 소금으로 해감 3회\n- **시래기**: 남원산 썼는데, 쌈장에 조물조물 무쳐서 비린내 제거\n- **들깨가루**: 마지막에 넣어야 향이 살아\n- **고추장 vs 된장**: 남원은 **된장 베이스**가 정통\n\n서울이나 다른 지역 추어탕이랑 맛이 완전 달라요. 지역 향토음식 배우니까 \"내가 이 지역에 사는 이유\"가 더 또렷해지는 느낌.\n\n추어향 사장님께 인턴 신청 해볼까 진지하게 고민 중 🤔",
+      tags: ["남원추어탕", "향토음식", "실습"],
+    },
+    {
+      authorId: idStudent6,
+      category: "TIP",
+      title: "조리복 관리 꿀팁 - 기름때 세탁 노하우",
+      content: "진경여고 윤하은입니다.\n\n조리복 기름때 진짜 안 빠지죠? 제가 한 학기 동안 이것저것 해보고 찾은 루틴 공유!\n\n**당일 관리**\n1. 실습 끝나자마자 찬물로 얼룩 부위 가볍게 헹구기 (뜨거운 물 절대 NO, 기름 고착됨)\n2. 주방세제 한 방울 + 칫솔로 문지르기\n\n**세탁 (주 1회)**\n- 과탄산소다 1스푼 + 베이킹소다 1스푼 + 40도 미지근한 물에 30분 불리기\n- 세탁기 표준 코스 + 울샴푸 (색 바램 방지)\n- 햇볕에 말려 살균\n\n**소스 얼룩별**\n- 데미글라스: 식초 + 베이킹소다\n- 토마토: 비누로 즉시 처리\n- 블랙 (잉크/간장): 우유에 30분 담그면 진짜 빠짐 ✨\n\n수업 이틀 전에는 꼭 미리 빨아두세요. 마르는데 시간 걸려요.",
+      tags: ["조리복", "관리", "팁"],
+    },
+  ];
+
+  for (const p of postsData) {
+    if (!p.authorId) continue;
+    const createdAt =
+      p.createdAt ||
+      new Date(
+        Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000)
+      );
+    await prisma.post.create({
+      data: {
+        authorId: p.authorId,
+        category: p.category,
+        title: p.title,
+        content: p.content,
+        tags: p.tags ? JSON.stringify(p.tags) : null,
+        isPinned: !!p.isPinned,
+        isMentorAnswer: !!p.isMentorAnswer,
+        createdAt,
+        viewCount: Math.floor(Math.random() * 200) + 30,
+        likeCount: Math.floor(Math.random() * 40) + 3,
+      },
+    });
+  }
+
+  // 댓글 몇 개 심기 (최근 4개 게시글에)
+  const recentPosts = await prisma.post.findMany({
+    orderBy: { createdAt: "desc" },
+    take: 6,
+  });
+  const commenters = [
+    idStudent1, idStudent2, idStudent4, idStudent6, idStudent8,
+    idUniv1, idUniv2, idUniv3,
+  ].filter(Boolean) as string[];
+  const commentBank = [
+    "좋은 정보 감사합니다! 저도 이번에 준비해볼게요.",
+    "진짜 도움 많이 됐어요. 북마크 합니다!",
+    "선배님 답변 너무 감동이에요 🥺",
+    "저도 비슷한 경험이 있어서 공감합니다.",
+    "질문 하나 있어요! 혹시 시간 여유 되시면 쪽지 부탁드려도 될까요?",
+    "공유해주셔서 감사합니다. 주변에도 알릴게요.",
+    "저희 학교 실습실에서도 해봐야겠어요.",
+    "이 부분 더 자세히 알고 싶어요.",
+  ];
+  for (const p of recentPosts.slice(0, 5)) {
+    const nComments = Math.floor(Math.random() * 3) + 2;
+    for (let i = 0; i < nComments; i++) {
+      const authorId = commenters[Math.floor(Math.random() * commenters.length)];
+      await prisma.comment.create({
+        data: {
+          postId: p.id,
+          authorId,
+          content: commentBank[Math.floor(Math.random() * commentBank.length)],
+        },
+      });
+    }
+    const finalCount = await prisma.comment.count({ where: { postId: p.id } });
+    await prisma.post.update({
+      where: { id: p.id },
+      data: { commentCount: finalCount },
+    });
+  }
+
   console.log("Seed completed!");
-  console.log(`- Students: ${studentsData.length}`);
+  console.log(`- HS Students: ${studentsData.length}`);
+  console.log(`- Univ Students: ${univStudentsData.length}`);
   console.log(`- Companies: ${companiesData.length}`);
   console.log(`- Jobs: ${jobsData.length}`);
   console.log(`- Notices: ${noticesData.length}`);
   console.log(`- Programs: ${programsData.length}`);
+  console.log(`- 맛담 Posts: ${postsData.length}`);
 }
 
 main()

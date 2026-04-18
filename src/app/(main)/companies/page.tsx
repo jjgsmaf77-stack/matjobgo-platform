@@ -16,7 +16,13 @@ export default async function CompaniesPage() {
 
       {companies.length === 0 ? (
         <div className="text-center py-20 bg-white rounded-2xl border">
-          <div className="text-5xl mb-4">🏢</div>
+          <div className="w-14 h-14 bg-gray-100 rounded-2xl mx-auto mb-4 inline-flex items-center justify-center">
+            <svg className="w-7 h-7 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+              <rect x="4" y="2" width="16" height="20" rx="2" strokeLinejoin="round" />
+              <line x1="9" y1="22" x2="9" y2="18" strokeLinecap="round" />
+              <line x1="15" y1="22" x2="15" y2="18" strokeLinecap="round" />
+            </svg>
+          </div>
           <h3 className="text-xl font-bold text-gray-900 mb-2">등록된 기업이 없습니다</h3>
           <p className="text-gray-500">곧 참여 기업이 등록될 예정입니다.</p>
         </div>
@@ -26,8 +32,12 @@ export default async function CompaniesPage() {
             <Link key={company.id} href={`/companies/${company.id}`}
               className="bg-white rounded-2xl border p-6 hover:shadow-lg transition block">
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center text-2xl">
-                  🏢
+                <div className="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center">
+                  <svg className="w-7 h-7 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                    <rect x="4" y="2" width="16" height="20" rx="2" strokeLinejoin="round" />
+                    <line x1="9" y1="22" x2="9" y2="18" strokeLinecap="round" />
+                    <line x1="15" y1="22" x2="15" y2="18" strokeLinecap="round" />
+                  </svg>
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900">{company.companyName}</h3>
@@ -41,7 +51,13 @@ export default async function CompaniesPage() {
               )}
               <div className="flex items-center justify-between text-sm">
                 {company.address && (
-                  <span className="text-gray-500">📍 {company.address}</span>
+                  <span className="text-gray-500 inline-flex items-center gap-1">
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    {company.address}
+                  </span>
                 )}
                 {company._count.jobPostings > 0 && (
                   <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full">

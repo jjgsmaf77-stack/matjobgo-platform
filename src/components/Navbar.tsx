@@ -45,6 +45,15 @@ export default function Navbar() {
               교육프로그램
             </Link>
             <Link
+              href="/matdam"
+              className="text-gray-600 hover:text-orange-600 font-medium transition inline-flex items-center gap-1"
+            >
+              맛담
+              <span className="bg-[#D97706] text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full leading-none">
+                NEW
+              </span>
+            </Link>
+            <Link
               href="/notices"
               className="text-gray-600 hover:text-orange-600 font-medium transition"
             >
@@ -135,6 +144,7 @@ export default function Navbar() {
           <Link href="/jobs" className="block py-2 text-gray-600" onClick={() => setMobileOpen(false)}>채용공고</Link>
           <Link href="/companies" className="block py-2 text-gray-600" onClick={() => setMobileOpen(false)}>기업정보</Link>
           <Link href="/programs" className="block py-2 text-gray-600" onClick={() => setMobileOpen(false)}>교육프로그램</Link>
+          <Link href="/matdam" className="block py-2 text-gray-600" onClick={() => setMobileOpen(false)}>맛담 <span className="bg-[#D97706] text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full leading-none ml-1">NEW</span></Link>
           <Link href="/notices" className="block py-2 text-gray-600" onClick={() => setMobileOpen(false)}>공지사항</Link>
           {session ? (
             <>

@@ -23,6 +23,12 @@ model User {
   company       Company?
   sentMessages     Message[] @relation("SentMessages")
   receivedMessages Message[] @relation("ReceivedMessages")
+
+  // 맛담 플랫폼
+  posts         Post[]
+  comments      Comment[]
+  postLikes     PostLike[]
+  bookmarks     Bookmark[]
 }
 
 // ==================== 학생 프로필 ====================
@@ -31,8 +37,11 @@ model Student {
   userId          String   @unique
   user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  school          String   // 소속 고등학교
+  studentType     String   @default("HIGH_SCHOOL") // HIGH_SCHOOL, UNIVERSITY
+  school          String   // 소속 고등학교 또는 대학교
   grade           String?  // 학년
+  major           String?  // 전공 (대학생용)
+  isMentor        Boolean  @default(false) // 멘토 활동 여부 (대학생)
   birthDate       String?
   introduction    String?  // 자기소개서
   resumeFile      String?  // 이력서 파일 경로
@@ -163,6 +172,80 @@ model Program {
 
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+}
+
+// ==================== 맛담 게시글 ====================
+// 카테고리: LEARNING(학습경험), PROGRAM(프로그램 후기), CURRICULUM(교육과정),
+//          VOLUNTEER(사회공헌), CAREER(진로고민), TIP(노하우), RECIPE(레시피)
+model Post {
+  id              String   @id @default(cuid())
+  authorId        String
+  author          User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  category        String
+  title           String
+  content         String
+  images          String?  // JSON: ["/uploads/posts/...", ...]
+  tags            String?  // JSON: ["한식", "취업팁"]
+  viewCount       Int      @default(0)
+  likeCount       Int      @default(0)
+  commentCount    Int      @default(0)
+  isPinned        Boolean  @default(false)
+  isMentorAnswer  Boolean  @default(false) // 대학생 멘토가 작성한 답변 글
+
+  comments        Comment[]
+  likes           PostLike[]
+  bookmarks       Bookmark[]
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([category])
+  @@index([createdAt])
+}
+
+// ==================== 맛담 댓글 ====================
+model Comment {
+  id        String   @id @default(cuid())
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  content   String
+  parentId  String?
+  parent    Comment? @relation("Replies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies   Comment[] @relation("Replies")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([postId])
+  @@index([parentId])
+}
+
+// ==================== 좋아요 ====================
+model PostLike {
+  id        String   @id @default(cuid())
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([postId, userId])
+}
+
+// ==================== 북마크 ====================
+model Bookmark {
+  id        String   @id @default(cuid())
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([postId, userId])
 }
 
 // ==================== 공지사항 ====================

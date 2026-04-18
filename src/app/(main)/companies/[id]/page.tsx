@@ -19,8 +19,12 @@ export default async function CompanyDetailPage({ params }: { params: Promise<{ 
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="bg-white rounded-2xl border p-8">
         <div className="flex items-center gap-5 mb-6">
-          <div className="w-20 h-20 bg-orange-100 rounded-2xl flex items-center justify-center text-4xl">
-            🏢
+          <div className="w-20 h-20 bg-orange-100 rounded-2xl flex items-center justify-center">
+            <svg className="w-10 h-10 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+              <rect x="4" y="2" width="16" height="20" rx="2" strokeLinejoin="round" />
+              <line x1="9" y1="22" x2="9" y2="18" strokeLinecap="round" />
+              <line x1="15" y1="22" x2="15" y2="18" strokeLinecap="round" />
+            </svg>
           </div>
           <div>
             <h1 className="text-3xl font-bold text-gray-900">{company.companyName}</h1>

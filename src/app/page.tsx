@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { readdir } from "fs/promises";
 import path from "path";
+import { Icon } from "@/components/Icon";
 
 async function getGalleryImages(): Promise<string[]> {
   try {
@@ -55,27 +56,53 @@ export default async function Home() {
         </div>
       </header>
 
-      {/* Hero - 삼성 스타일 대형 히어로 */}
+      {/* Hero - 맛JOB GO 초대형 브랜드 타이포 */}
       <section className="relative bg-[#0a0a0a] overflow-hidden">
-        {/* 배경 그라데이션 */}
+        {/* 배경 그라데이션 + 광채 */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#0d1340] to-[#0a0a0a]" />
+        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-[#1428A0]/30 rounded-full blur-[140px]" />
+        <div className="absolute -bottom-40 -right-40 w-[600px] h-[600px] bg-[#7a8fff]/20 rounded-full blur-[140px]" />
 
-        <div className="relative max-w-[1440px] mx-auto px-8 pt-32 pb-36 text-center">
-          <p className="text-[#7a8fff] text-[13px] font-semibold tracking-[0.2em] uppercase mb-8">
-            RISE Track IV | Regional Innovation
+        {/* 배경 워터마크 MATJOBGO */}
+        <div
+          className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden select-none"
+          aria-hidden="true"
+        >
+          <span className="text-[24vw] md:text-[18vw] font-black text-white/[0.03] tracking-[-0.05em] leading-none whitespace-nowrap">
+            MATJOBGO
+          </span>
+        </div>
+
+        <div className="relative max-w-[1440px] mx-auto px-8 pt-24 md:pt-28 pb-28 md:pb-32 text-center">
+          <p className="text-[#7a8fff] text-[12px] md:text-[13px] font-bold tracking-[0.35em] uppercase mb-10 md:mb-12">
+            RISE Track IV · Regional Innovation
           </p>
-          <h1 className="text-white text-[52px] md:text-[72px] font-extrabold leading-[1.05] tracking-tight mb-6">
+
+          {/* 맛 JOB GO 초대형 로고 타이포 */}
+          <h1 className="font-black leading-[0.85] tracking-[-0.04em] flex flex-wrap items-baseline justify-center gap-x-4 md:gap-x-8">
+            <span className="text-white text-[28vw] md:text-[220px] lg:text-[260px] xl:text-[300px]">
+              맛
+            </span>
+            <span className="text-[22vw] md:text-[180px] lg:text-[210px] xl:text-[240px] bg-gradient-to-r from-white via-[#7a8fff] to-[#1428A0] bg-clip-text text-transparent">
+              JOB
+            </span>
+            <span className="text-white text-[22vw] md:text-[180px] lg:text-[210px] xl:text-[240px]">
+              GO
+            </span>
+          </h1>
+
+          <h2 className="text-white text-[26px] md:text-[36px] font-bold leading-[1.15] tracking-tight mt-10 md:mt-14">
             전북의 맛을 품은
             <br />
             로컬 조리 인재
-          </h1>
-          <p className="text-white/50 text-[17px] leading-relaxed max-w-lg mx-auto mb-12">
+          </h2>
+          <p className="text-white/50 text-[14px] md:text-[16px] leading-relaxed max-w-lg mx-auto mt-5">
             호원대학교와 전북 지역 외식산업을 연결하는
             <br />
             AI 기반 스마트 인재 매칭 플랫폼
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/register?role=student" className="inline-flex items-center justify-center px-8 py-[14px] bg-white text-black text-[14px] font-semibold rounded-full hover:bg-white/90 transition">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10 md:mt-12">
+            <Link href="/register?role=student" className="inline-flex items-center justify-center px-8 py-[14px] bg-white text-black text-[14px] font-semibold rounded-full hover:bg-white/90 transition shadow-2xl shadow-[#1428A0]/30">
               학생 시작하기
             </Link>
             <Link href="/register?role=company" className="inline-flex items-center justify-center px-8 py-[14px] bg-white/10 text-white text-[14px] font-semibold rounded-full border border-white/20 hover:bg-white/15 transition">
@@ -159,8 +186,8 @@ export default async function Home() {
           <div className="grid md:grid-cols-3 gap-5">
             {/* 학생 */}
             <div className="bg-white rounded-3xl p-10 hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group">
-              <div className="w-14 h-14 bg-[#e8ecff] rounded-2xl flex items-center justify-center text-[26px] mb-8 group-hover:scale-105 transition-transform duration-500">
-                🎓
+              <div className="w-14 h-14 bg-[#e8ecff] rounded-2xl flex items-center justify-center mb-8 group-hover:scale-105 transition-transform duration-500">
+                <Icon name="student" size={26} strokeWidth={1.75} className="text-[#1428A0]" />
               </div>
               <h3 className="text-[22px] font-bold text-black mb-1">학생</h3>
               <p className="text-[12px] text-[#1428A0] font-semibold mb-6">직업계고 재학생</p>
@@ -178,8 +205,8 @@ export default async function Home() {
 
             {/* 기업 */}
             <div className="bg-[#1428A0] rounded-3xl p-10 hover:shadow-2xl hover:shadow-[#1428A0]/20 transition-all duration-500 group">
-              <div className="w-14 h-14 bg-white/15 rounded-2xl flex items-center justify-center text-[26px] mb-8 group-hover:scale-105 transition-transform duration-500">
-                🏢
+              <div className="w-14 h-14 bg-white/15 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-105 transition-transform duration-500">
+                <Icon name="building" size={26} strokeWidth={1.75} className="text-white" />
               </div>
               <h3 className="text-[22px] font-bold text-white mb-1">기업</h3>
               <p className="text-[12px] text-white/60 font-semibold mb-6">전북 지역 외식업체</p>
@@ -197,8 +224,8 @@ export default async function Home() {
 
             {/* 대학 */}
             <div className="bg-white rounded-3xl p-10 hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group">
-              <div className="w-14 h-14 bg-[#f0f0f0] rounded-2xl flex items-center justify-center text-[26px] mb-8 group-hover:scale-105 transition-transform duration-500">
-                🏫
+              <div className="w-14 h-14 bg-[#f0f0f0] rounded-2xl flex items-center justify-center mb-8 group-hover:scale-105 transition-transform duration-500">
+                <Icon name="school" size={26} strokeWidth={1.75} className="text-[#1428A0]" />
               </div>
               <h3 className="text-[22px] font-bold text-black mb-1">대학</h3>
               <p className="text-[12px] text-[#1428A0] font-semibold mb-6">호원대학교 사업단</p>
@@ -229,14 +256,16 @@ export default async function Home() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { name: "한식", desc: "전주비빔밥 · 한정식", icon: "🍚" },
-              { name: "양식", desc: "모던 유러피안 퀴진", icon: "🍝" },
-              { name: "제과제빵", desc: "수제 베이커리 · 디저트", icon: "🍞" },
-              { name: "카페 · 바리스타", desc: "스페셜티 커피", icon: "☕" },
-            ].map((f) => (
+            {([
+              { name: "한식", desc: "전주비빔밥 · 한정식", iconName: "bowl-rice" as const },
+              { name: "양식", desc: "모던 유러피안 퀴진", iconName: "pasta" as const },
+              { name: "제과제빵", desc: "수제 베이커리 · 디저트", iconName: "bread" as const },
+              { name: "카페 · 바리스타", desc: "스페셜티 커피", iconName: "coffee" as const },
+            ]).map((f) => (
               <div key={f.name} className="bg-[#f6f6f6] hover:bg-[#eef0ff] rounded-2xl p-8 text-center transition-all duration-300 cursor-default group">
-                <div className="text-[40px] mb-4 group-hover:scale-110 transition-transform duration-300">{f.icon}</div>
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <Icon name={f.iconName} size={26} strokeWidth={1.75} className="text-[#1428A0]" />
+                </div>
                 <div className="text-[16px] font-bold text-black">{f.name}</div>
                 <div className="text-[12px] text-black/35 mt-1.5">{f.desc}</div>
               </div>
@@ -265,6 +294,139 @@ export default async function Home() {
                     <div className="text-[11px] text-white/35 mt-1">{item.label}</div>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 맛담 커뮤니티 (Warm Amber) */}
+      <section className="bg-[#1A0F04] relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1A0F04] via-[#3D2410] to-[#1A0F04]" />
+        <div className="absolute -top-32 -left-32 w-[420px] h-[420px] bg-[#D97706]/30 rounded-full blur-[120px]" />
+        <div className="absolute -bottom-32 -right-32 w-[420px] h-[420px] bg-[#F59E0B]/25 rounded-full blur-[120px]" />
+        <div className="relative max-w-[1440px] mx-auto px-8 py-28">
+          <div className="grid md:grid-cols-[1.1fr_1fr] gap-12 md:gap-16 items-center">
+            <div>
+              <p className="text-[#FCD34D] text-[12px] font-bold tracking-[0.25em] uppercase mb-5">
+                맛담 · MatDam
+              </p>
+              <h2 className="text-white text-[36px] md:text-[48px] font-bold leading-[1.1] tracking-tight mb-6">
+                고등학생과 대학생이<br />
+                이야기를 나누는 공간
+              </h2>
+              <p className="text-white/60 text-[15px] leading-relaxed mb-10 max-w-lg">
+                학습경험 · 프로그램 후기 · 교육과정 · 사회공헌 · 진로고민을
+                자유롭게 공유하고, 호원대 호텔조리학과 선배들에게 직접 멘토링을 받아보세요.
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10 max-w-lg">
+                {([
+                  { iconName: "book" as const, label: "학습경험" },
+                  { iconName: "trophy" as const, label: "프로그램 후기" },
+                  { iconName: "compass" as const, label: "진로고민" },
+                  { iconName: "bowl" as const, label: "레시피" },
+                ]).map((c) => (
+                  <div
+                    key={c.label}
+                    className="bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col items-center gap-2"
+                  >
+                    <Icon
+                      name={c.iconName}
+                      size={22}
+                      strokeWidth={1.5}
+                      className="text-[#FCD34D]"
+                    />
+                    <div className="text-[12px] text-white/70 font-medium">
+                      {c.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="flex gap-3">
+                <Link
+                  href="/matdam"
+                  className="inline-flex items-center gap-2 bg-[#D97706] text-white px-7 py-3.5 rounded-full text-[14px] font-semibold hover:bg-[#B45309] transition shadow-2xl shadow-[#D97706]/40"
+                >
+                  맛담 둘러보기
+                  <Icon name="arrow-right" size={16} strokeWidth={2.5} />
+                </Link>
+                <Link
+                  href="/matdam/new"
+                  className="inline-flex items-center gap-2 bg-white/10 text-white px-7 py-3.5 rounded-full text-[14px] font-semibold border border-white/20 hover:bg-white/15 transition"
+                >
+                  글쓰기
+                </Link>
+              </div>
+            </div>
+
+            {/* 가상 글 미리보기 카드 */}
+            <div className="relative">
+              <div className="absolute -top-6 -left-6 w-32 h-32 bg-[#F59E0B]/25 rounded-full blur-3xl" />
+              <div className="absolute -bottom-6 -right-6 w-40 h-40 bg-[#D97706]/30 rounded-full blur-3xl" />
+              <div className="relative space-y-4">
+                <div className="bg-white rounded-3xl p-6 shadow-2xl shadow-black/40 transform md:-rotate-1">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="bg-[#D97706] text-white text-[10px] px-2 py-0.5 rounded-full font-bold">
+                      멘토 답변
+                    </span>
+                    <span className="bg-[#FEF3C7] text-[#B45309] text-[10px] px-2 py-0.5 rounded-full font-bold inline-flex items-center gap-1">
+                      <Icon name="compass" size={10} strokeWidth={2.5} />
+                      진로고민
+                    </span>
+                  </div>
+                  <h3 className="font-bold text-black text-[15px] mb-2 leading-snug">
+                    지역에서 시작하는 조리사도 충분히 경쟁력 있어요
+                  </h3>
+                  <p className="text-black/50 text-[12px] leading-relaxed line-clamp-3">
+                    향토음식 전문성은 오히려 희소 가치예요. 남원 추어탕처럼 브랜드 파워 있는 노포에서 시작하면 레퍼런스가 됩니다...
+                  </p>
+                  <div className="flex items-center justify-between mt-4 pt-3 border-t border-black/5">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#D97706] to-[#F59E0B] flex items-center justify-center text-white font-bold text-[11px]">
+                        오
+                      </div>
+                      <span className="text-[11px] font-semibold text-black">오지호 · 호원대 3학년</span>
+                    </div>
+                    <div className="flex gap-2 text-[10px] text-black/40">
+                      <span className="inline-flex items-center gap-0.5">
+                        <Icon name="heart" size={10} strokeWidth={2} />24
+                      </span>
+                      <span className="inline-flex items-center gap-0.5">
+                        <Icon name="chat" size={10} strokeWidth={2} />7
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-white rounded-3xl p-6 shadow-2xl shadow-black/40 transform md:rotate-1 md:ml-8">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="bg-[#FEF3C7] text-[#B45309] text-[10px] px-2 py-0.5 rounded-full font-bold inline-flex items-center gap-1">
+                      <Icon name="lightbulb" size={10} strokeWidth={2.5} />
+                      노하우
+                    </span>
+                  </div>
+                  <h3 className="font-bold text-black text-[15px] mb-2 leading-snug">
+                    한식조리기능사 실기 3주 단기 합격 루틴
+                  </h3>
+                  <p className="text-black/50 text-[12px] leading-relaxed line-clamp-2">
+                    1주차는 전체 감 잡기, 2주차는 매일 2과제 연습, 3주차는 취약 과제 집중...
+                  </p>
+                  <div className="flex items-center justify-between mt-4 pt-3 border-t border-black/5">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#D97706] to-[#F59E0B] flex items-center justify-center text-white font-bold text-[11px]">
+                        김
+                      </div>
+                      <span className="text-[11px] font-semibold text-black">김민수 · 진경여고 3학년</span>
+                    </div>
+                    <div className="flex gap-2 text-[10px] text-black/40">
+                      <span className="inline-flex items-center gap-0.5">
+                        <Icon name="heart" size={10} strokeWidth={2} />18
+                      </span>
+                      <span className="inline-flex items-center gap-0.5">
+                        <Icon name="chat" size={10} strokeWidth={2} />4
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

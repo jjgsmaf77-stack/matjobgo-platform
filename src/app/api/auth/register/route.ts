@@ -41,8 +41,12 @@ export async function POST(request: Request) {
         ...(role === "STUDENT" && {
           student: {
             create: {
+              studentType: profileData.studentType === "UNIVERSITY"
+                ? "UNIVERSITY"
+                : "HIGH_SCHOOL",
               school: profileData.school || "",
               grade: profileData.grade,
+              major: profileData.major || null,
               desiredField: profileData.desiredField,
             },
           },
