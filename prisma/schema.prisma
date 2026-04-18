@@ -1,0 +1,178 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// ==================== 사용자 (공통) ====================
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  name          String
+  role          String    // STUDENT, COMPANY, ADMIN
+  phone         String?
+  profileImage  String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  student       Student?
+  company       Company?
+  sentMessages     Message[] @relation("SentMessages")
+  receivedMessages Message[] @relation("ReceivedMessages")
+}
+
+// ==================== 학생 프로필 ====================
+model Student {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  school          String   // 소속 고등학교
+  grade           String?  // 학년
+  birthDate       String?
+  introduction    String?  // 자기소개서
+  resumeFile      String?  // 이력서 파일 경로
+  desiredField    String?  // 취업희망분야 (JSON: ["한식","양식","제과제빵"])
+  desiredLocation String?  // 희망근무지역
+  skills          String?  // 보유 기술/자격증 (JSON)
+  experience      String?  // 경력/경험 사항
+  portfolioUrl    String?  // 포트폴리오 링크
+  isPublic        Boolean  @default(true)
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  applications    Application[]
+  matchResults    MatchResult[]
+}
+
+// ==================== 기업 프로필 ====================
+model Company {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  companyName     String   // 업체명
+  businessNumber  String?  // 사업자등록번호
+  representative  String?  // 대표자명
+  industry        String?  // 업종 (한식, 양식, 제과제빵, 카페 등)
+  address         String?  // 소재지
+  description     String?  // 기업 소개
+  idealTalent     String?  // 인재상
+  employeeCount   Int?     // 직원 수
+  website         String?  // 웹사이트
+  logoImage       String?  // 로고 이미지
+  isVerified      Boolean  @default(false)
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  jobPostings     JobPosting[]
+  matchResults    MatchResult[]
+}
+
+// ==================== 채용공고 ====================
+model JobPosting {
+  id              String   @id @default(cuid())
+  companyId       String
+  company         Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  title           String   // 공고 제목
+  field           String   // 분야 (한식, 양식, 제과제빵, 카페·베이커리 등)
+  description     String   // 상세 설명
+  requirements    String?  // 자격요건
+  preferredSkills String?  // 우대 기술 (JSON)
+  salary          String?  // 급여 조건
+  workLocation    String?  // 근무지
+  workSchedule    String?  // 근무시간
+  benefits        String?  // 복리후생
+  recruitCount    Int?     // 모집 인원
+  deadline        DateTime? // 마감일
+  status          String   @default("OPEN") // OPEN, CLOSED, DRAFT
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  applications    Application[]
+  matchResults    MatchResult[]
+}
+
+// ==================== 지원 내역 ====================
+model Application {
+  id              String   @id @default(cuid())
+  studentId       String
+  student         Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  jobPostingId    String
+  jobPosting      JobPosting @relation(fields: [jobPostingId], references: [id], onDelete: Cascade)
+
+  coverLetter     String?  // 지원 동기
+  status          String   @default("PENDING") // PENDING, REVIEWED, ACCEPTED, REJECTED
+  appliedAt       DateTime @default(now())
+  reviewedAt      DateTime?
+  note            String?  // 기업 메모
+
+  @@unique([studentId, jobPostingId])
+}
+
+// ==================== 매칭 결과 ====================
+model MatchResult {
+  id              String   @id @default(cuid())
+  studentId       String
+  student         Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  companyId       String
+  company         Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  jobPostingId    String?
+  jobPosting      JobPosting? @relation(fields: [jobPostingId], references: [id])
+
+  matchScore      Float    // 매칭 점수 (0~100)
+  matchReasons    String?  // 매칭 근거 (JSON)
+  status          String   @default("SUGGESTED") // SUGGESTED, VIEWED, CONTACTED
+
+  createdAt       DateTime @default(now())
+
+  @@unique([studentId, companyId, jobPostingId])
+}
+
+// ==================== 메시지 ====================
+model Message {
+  id              String   @id @default(cuid())
+  senderId        String
+  sender          User     @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  receiverId      String
+  receiver        User     @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+
+  content         String
+  isRead          Boolean  @default(false)
+  createdAt       DateTime @default(now())
+}
+
+// ==================== 프로그램 (On-D-Gourmet 등) ====================
+model Program {
+  id              String   @id @default(cuid())
+  title           String
+  category        String   // ON_D_GOURMET, COOKING_BRIDGE, CAMP, VOLUNTEER
+  description     String?
+  schedule        String?
+  location        String?
+  maxParticipants Int?
+  status          String   @default("UPCOMING") // UPCOMING, ONGOING, COMPLETED
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// ==================== 공지사항 ====================
+model Notice {
+  id              String   @id @default(cuid())
+  title           String
+  content         String
+  authorId        String
+  isPinned        Boolean  @default(false)
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
