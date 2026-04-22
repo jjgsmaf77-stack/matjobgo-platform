@@ -41,7 +41,7 @@ export default async function StudentDashboard() {
           <p className="text-gray-600 mt-1">{student.school}</p>
         </div>
         <Link href="/student/profile"
-          className="bg-orange-600 text-white px-5 py-2.5 rounded-xl font-medium hover:bg-orange-700 transition">
+          className="bg-[#DC2626] text-white px-5 py-2.5 rounded-xl font-medium hover:bg-[#991B1B] transition">
           프로필 수정
         </Link>
       </div>
@@ -49,7 +49,7 @@ export default async function StudentDashboard() {
       {/* 요약 카드 */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         <div className="bg-white rounded-xl border p-5">
-          <div className="text-2xl font-bold text-orange-600">{applications.length}</div>
+          <div className="text-2xl font-bold text-[#DC2626]">{applications.length}</div>
           <div className="text-sm text-gray-500 mt-1">지원 현황</div>
         </div>
         <div className="bg-white rounded-xl border p-5">
@@ -79,7 +79,7 @@ export default async function StudentDashboard() {
               <span className="text-gray-500">희망분야</span>
               <div className="flex flex-wrap gap-1 mt-1">
                 {desiredFields.length > 0 ? desiredFields.map((f: string) => (
-                  <span key={f} className="bg-orange-100 text-orange-700 px-2 py-0.5 rounded text-xs">{f}</span>
+                  <span key={f} className="bg-[#FEE2E2] text-[#991B1B] px-2 py-0.5 rounded text-xs">{f}</span>
                 )) : <span className="text-gray-400">미설정</span>}
               </div>
             </div>
@@ -97,7 +97,7 @@ export default async function StudentDashboard() {
             </div>
           </div>
           <Link href="/student/profile"
-            className="block text-center mt-4 text-orange-600 font-medium text-sm hover:underline">
+            className="block text-center mt-4 text-[#DC2626] font-medium text-sm hover:underline">
             프로필 편집하기 →
           </Link>
         </div>
@@ -113,7 +113,7 @@ export default async function StudentDashboard() {
             <div className="space-y-3">
               {matchResults.map((match) => (
                 <Link key={match.id} href={`/companies/${match.companyId}`}
-                  className="block bg-gray-50 rounded-xl p-4 hover:bg-orange-50 transition">
+                  className="block bg-gray-50 rounded-xl p-4 hover:bg-[#FEF2F2] transition">
                   <div className="flex items-center justify-between">
                     <div>
                       <h4 className="font-medium text-gray-900">{match.company.companyName}</h4>
@@ -122,7 +122,7 @@ export default async function StudentDashboard() {
                       )}
                     </div>
                     <div className="text-right">
-                      <div className="text-lg font-bold text-orange-600">{Math.round(match.matchScore)}%</div>
+                      <div className="text-lg font-bold text-[#DC2626]">{Math.round(match.matchScore)}%</div>
                       <div className="text-xs text-gray-400">매칭률</div>
                     </div>
                   </div>
@@ -138,7 +138,7 @@ export default async function StudentDashboard() {
           {applications.length === 0 ? (
             <div className="text-center py-8 text-gray-400">
               <p>아직 지원 내역이 없습니다</p>
-              <Link href="/jobs" className="text-orange-600 font-medium text-sm mt-2 inline-block hover:underline">
+              <Link href="/jobs" className="text-[#DC2626] font-medium text-sm mt-2 inline-block hover:underline">
                 채용공고 보러가기 →
               </Link>
             </div>

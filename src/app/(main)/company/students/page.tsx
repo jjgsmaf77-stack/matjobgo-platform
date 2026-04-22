@@ -50,7 +50,7 @@ export default async function StudentsSearchPage() {
                 {fields.length > 0 && (
                   <div className="flex flex-wrap gap-1 mb-3">
                     {fields.map((f: string) => (
-                      <span key={f} className="bg-orange-100 text-orange-700 px-2 py-0.5 rounded text-xs">{f}</span>
+                      <span key={f} className="bg-[#FEE2E2] text-[#991B1B] px-2 py-0.5 rounded text-xs">{f}</span>
                     ))}
                   </div>
                 )}
@@ -65,7 +65,7 @@ export default async function StudentsSearchPage() {
 
                 <div className="flex gap-2 mt-4">
                   <Link href={`/messages?to=${student.userId}`}
-                    className="flex-1 text-center bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-orange-700 transition">
+                    className="flex-1 text-center bg-[#DC2626] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#991B1B] transition">
                     메시지 보내기
                   </Link>
                 </div>

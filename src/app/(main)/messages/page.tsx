@@ -106,7 +106,7 @@ function MessagesContent() {
                   <button key={conv.partnerId}
                     onClick={() => setSelectedPartner(conv.partnerId)}
                     className={`w-full text-left p-4 border-b hover:bg-gray-50 transition ${
-                      selectedPartner === conv.partnerId ? "bg-orange-50" : ""
+                      selectedPartner === conv.partnerId ? "bg-[#FEF2F2]" : ""
                     }`}>
                     <div className="flex items-center justify-between">
                       <div>
@@ -114,7 +114,7 @@ function MessagesContent() {
                         <span className="ml-1 text-xs text-gray-400">({roleLabel(conv.partnerRole)})</span>
                       </div>
                       {conv.unreadCount > 0 && (
-                        <span className="bg-orange-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                        <span className="bg-[#DC2626] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
                           {conv.unreadCount}
                         </span>
                       )}
@@ -139,12 +139,12 @@ function MessagesContent() {
                       className={`flex ${msg.senderId === userId ? "justify-end" : "justify-start"}`}>
                       <div className={`max-w-xs lg:max-w-md px-4 py-2.5 rounded-2xl ${
                         msg.senderId === userId
-                          ? "bg-orange-600 text-white"
+                          ? "bg-[#DC2626] text-white"
                           : "bg-gray-100 text-gray-900"
                       }`}>
                         <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
                         <p className={`text-xs mt-1 ${
-                          msg.senderId === userId ? "text-orange-200" : "text-gray-400"
+                          msg.senderId === userId ? "text-[#FECACA]" : "text-gray-400"
                         }`}>
                           {new Date(msg.createdAt).toLocaleString("ko-KR")}
                         </p>
@@ -159,11 +159,11 @@ function MessagesContent() {
                       value={newMessage}
                       onChange={(e) => setNewMessage(e.target.value)}
                       onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
-                      className="flex-1 px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+                      className="flex-1 px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
                       placeholder="메시지를 입력하세요..."
                     />
                     <button onClick={sendMessage} disabled={loading || !newMessage.trim()}
-                      className="bg-orange-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-orange-700 transition disabled:opacity-50">
+                      className="bg-[#DC2626] text-white px-6 py-3 rounded-xl font-medium hover:bg-[#991B1B] transition disabled:opacity-50">
                       전송
                     </button>
                   </div>

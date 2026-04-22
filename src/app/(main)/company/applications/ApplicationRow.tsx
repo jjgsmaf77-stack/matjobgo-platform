@@ -76,7 +76,7 @@ export default function ApplicationRow({
           <div className="flex items-center gap-2">
             <button
               onClick={() => setOpen(!open)}
-              className="text-orange-600 hover:underline text-xs"
+              className="text-[#DC2626] hover:underline text-xs"
             >
               {open ? "닫기" : "상세"}
             </button>
@@ -105,7 +105,7 @@ export default function ApplicationRow({
                     onClick={() => updateStatus(s)}
                     className={`px-4 py-1.5 rounded-lg text-xs font-medium transition ${
                       status === s
-                        ? "bg-orange-600 text-white"
+                        ? "bg-[#DC2626] text-white"
                         : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                     } disabled:opacity-50`}
                   >

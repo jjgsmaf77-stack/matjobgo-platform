@@ -1,0 +1,73 @@
+# =============================================================
+# 맛JobGO · Netlify 정적 헤더 (_headers)
+# netlify.toml 의 [[headers]] 블록과 함께 작동
+# =============================================================
+
+# ---------- 기본 보안 헤더 ----------
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# ---------- HTML · 캐시 최소화 (1시간) ----------
+/*.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# ---------- JS / CSS · 1일 캐시 + UTF-8 ----------
+/*.js
+  Cache-Control: public, max-age=86400
+  Content-Type: application/javascript; charset=UTF-8
+
+/*.css
+  Cache-Control: public, max-age=86400
+  Content-Type: text/css; charset=UTF-8
+
+# ---------- Next.js 정적 에셋 · 1년 immutable ----------
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# ---------- 이미지 · 7일 캐시 ----------
+/*.jpg
+  Cache-Control: public, max-age=604800
+
+/*.jpeg
+  Cache-Control: public, max-age=604800
+
+/*.png
+  Cache-Control: public, max-age=604800
+
+/*.webp
+  Cache-Control: public, max-age=604800
+
+/*.gif
+  Cache-Control: public, max-age=604800
+
+/*.svg
+  Cache-Control: public, max-age=604800
+  Content-Type: image/svg+xml; charset=UTF-8
+
+/*.ico
+  Cache-Control: public, max-age=604800
+
+# ---------- 업로드 사용자 이미지 · 30일 ----------
+/uploads/*
+  Cache-Control: public, max-age=2592000
+
+# ---------- 폰트 · 1년 immutable ----------
+/*.woff
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.ttf
+  Cache-Control: public, max-age=31536000, immutable
+
+# ---------- JSON API 응답 · no-cache (세션별 다름) ----------
+/api/*
+  Cache-Control: no-store, no-cache, must-revalidate
+  Content-Type: application/json; charset=UTF-8

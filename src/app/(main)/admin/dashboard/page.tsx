@@ -74,7 +74,7 @@ export default async function AdminDashboard() {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
         {[
           { label: "등록 학생", value: studentCount, color: "text-blue-600", bg: "bg-blue-50" },
-          { label: "등록 기업", value: companyCount, color: "text-orange-600", bg: "bg-orange-50" },
+          { label: "등록 기업", value: companyCount, color: "text-[#DC2626]", bg: "bg-[#FEF2F2]" },
           { label: "채용공고", value: jobCount, color: "text-green-600", bg: "bg-green-50" },
           { label: "총 지원", value: applicationCount, color: "text-purple-600", bg: "bg-purple-50" },
           { label: "매칭 건수", value: matchCount, color: "text-red-600", bg: "bg-red-50" },
@@ -115,7 +115,7 @@ export default async function AdminDashboard() {
               <div key={c.id} className="flex items-center justify-between bg-gray-50 rounded-xl p-3">
                 <div>
                   <span className="font-medium">{c.companyName}</span>
-                  {c.industry && <span className="text-sm text-orange-600 ml-2">{c.industry}</span>}
+                  {c.industry && <span className="text-sm text-[#DC2626] ml-2">{c.industry}</span>}
                 </div>
                 <span className={`text-xs px-2 py-0.5 rounded ${
                   c.isVerified ? "bg-green-100 text-green-700" : "bg-yellow-100 text-yellow-700"
@@ -176,7 +176,7 @@ export default async function AdminDashboard() {
       </div>
 
       {/* 플랫폼 활동 지표 */}
-      <div className="mt-8 bg-gradient-to-r from-orange-500 to-red-600 rounded-2xl p-8 text-white">
+      <div className="mt-8 bg-[#DC2626] rounded-2xl p-8 text-white">
         <h2 className="text-2xl font-bold mb-4">맛JobGO 플랫폼 성과 요약</h2>
         <div className="grid md:grid-cols-4 gap-6">
           <div>

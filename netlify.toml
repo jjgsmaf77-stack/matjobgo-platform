@@ -1,0 +1,81 @@
+# =============================================================
+# 맛JobGO 플랫폼 · Netlify 배포 설정
+# 호원대학교 RISE사업 Track 4-3-2
+# =============================================================
+
+[build]
+  command = "npx prisma generate && npm run build"
+  publish = ".next"
+  # 환경 변수는 Netlify 대시보드 → Site settings → Environment variables 에서 등록
+  # - TURSO_DATABASE_URL
+  # - TURSO_AUTH_TOKEN
+  # - NEXTAUTH_SECRET
+  # - NEXTAUTH_URL (https://matjobgo.co.kr)
+
+[build.environment]
+  NODE_VERSION = "20"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# Next.js 공식 Netlify 플러그인 (SSR · API 라우트 · ISR 지원)
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# ---------- 보안 헤더 ----------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+
+# ---------- 정적 에셋 캐시 (_next/static 은 immutable) ----------
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/uploads/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+# ---------- 이미지 · 폰트 캐시 ----------
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# ---------- 개발 환경 ----------
+[dev]
+  command = "npm run dev"
+  port = 3000
+  targetPort = 3000
+  publish = ".next"
+  autoLaunch = false
+
+# ---------- 배포 컨텍스트별 설정 ----------
+[context.production]
+  environment = { NEXT_PUBLIC_SITE_URL = "https://matjobgo.co.kr" }
+
+[context.deploy-preview]
+  environment = { NEXT_PUBLIC_SITE_URL = "https://deploy-preview.matjobgo.co.kr" }
+
+[context.branch-deploy]
+  environment = { NEXT_PUBLIC_SITE_URL = "https://branch.matjobgo.co.kr" }

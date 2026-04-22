@@ -79,7 +79,7 @@ export default function NoticesManager({
           onChange={(e) => setForm({ ...form, title: e.target.value })}
           placeholder="제목"
           required
-          className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+          className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
         />
         <textarea
           value={form.content}
@@ -87,21 +87,21 @@ export default function NoticesManager({
           placeholder="내용"
           rows={5}
           required
-          className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none resize-none"
+          className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none resize-none"
         />
         <label className="inline-flex items-center gap-2 text-sm text-gray-700">
           <input
             type="checkbox"
             checked={form.isPinned}
             onChange={(e) => setForm({ ...form, isPinned: e.target.checked })}
-            className="w-4 h-4 accent-orange-600"
+            className="w-4 h-4 accent-[#DC2626]"
           />
           상단 고정
         </label>
         <button
           type="submit"
           disabled={saving}
-          className="block w-full bg-orange-600 text-white py-2.5 rounded-xl font-medium hover:bg-orange-700 transition disabled:opacity-50"
+          className="block w-full bg-[#DC2626] text-white py-2.5 rounded-xl font-medium hover:bg-[#991B1B] transition disabled:opacity-50"
         >
           {saving ? "등록 중..." : "공지사항 등록"}
         </button>
@@ -142,7 +142,7 @@ export default function NoticesManager({
                   <div className="flex flex-col gap-2">
                     <button
                       onClick={() => togglePin(n.id, n.isPinned)}
-                      className="text-xs text-orange-600 hover:underline"
+                      className="text-xs text-[#DC2626] hover:underline"
                     >
                       {n.isPinned ? "고정 해제" : "상단 고정"}
                     </button>

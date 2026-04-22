@@ -20,7 +20,7 @@ export default async function NewPostPage() {
           >
             Matdam · New Post
           </p>
-          <h1 className="text-[28px] md:text-[36px] font-bold text-black leading-tight tracking-tight">
+          <h1 className="font-sans-ko text-[28px] md:text-[36px] font-bold text-[#2D0707] leading-tight tracking-tight">
             이야기를 나눠주세요
           </h1>
           <p className="text-[13px] text-black/50 mt-2">

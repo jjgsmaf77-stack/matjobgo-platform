@@ -108,7 +108,7 @@ export default function CompanyProfilePage() {
             value={form.companyName}
             onChange={(e) => setForm({ ...form, companyName: e.target.value })}
             required
-            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
           />
         </div>
 
@@ -122,7 +122,7 @@ export default function CompanyProfilePage() {
               onChange={(e) =>
                 setForm({ ...form, businessNumber: e.target.value })
               }
-              className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+              className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
               placeholder="000-00-00000"
             />
           </div>
@@ -135,7 +135,7 @@ export default function CompanyProfilePage() {
               onChange={(e) =>
                 setForm({ ...form, representative: e.target.value })
               }
-              className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+              className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
             />
           </div>
           <div>
@@ -145,7 +145,7 @@ export default function CompanyProfilePage() {
             <select
               value={form.industry}
               onChange={(e) => setForm({ ...form, industry: e.target.value })}
-              className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+              className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
             >
               <option value="">선택</option>
               {INDUSTRIES.map((f) => (
@@ -165,7 +165,7 @@ export default function CompanyProfilePage() {
               onChange={(e) =>
                 setForm({ ...form, employeeCount: e.target.value })
               }
-              className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+              className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
               placeholder="명"
             />
           </div>
@@ -178,7 +178,7 @@ export default function CompanyProfilePage() {
           <input
             value={form.address}
             onChange={(e) => setForm({ ...form, address: e.target.value })}
-            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
             placeholder="전라북도 전주시..."
           />
         </div>
@@ -190,7 +190,7 @@ export default function CompanyProfilePage() {
           <input
             value={form.website}
             onChange={(e) => setForm({ ...form, website: e.target.value })}
-            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
             placeholder="https://"
           />
         </div>
@@ -205,7 +205,7 @@ export default function CompanyProfilePage() {
               setForm({ ...form, description: e.target.value })
             }
             rows={5}
-            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none resize-none"
+            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none resize-none"
             placeholder="기업의 역사, 특징, 강점 등을 소개해주세요"
           />
         </div>
@@ -220,7 +220,7 @@ export default function CompanyProfilePage() {
               setForm({ ...form, idealTalent: e.target.value })
             }
             rows={4}
-            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none resize-none"
+            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none resize-none"
             placeholder="어떤 인재와 함께 하고 싶은지 작성해주세요"
           />
         </div>
@@ -228,7 +228,7 @@ export default function CompanyProfilePage() {
         <button
           type="submit"
           disabled={saving}
-          className="w-full bg-orange-600 text-white py-3 rounded-xl font-bold hover:bg-orange-700 transition disabled:opacity-50"
+          className="w-full bg-[#DC2626] text-white py-3 rounded-xl font-bold hover:bg-[#991B1B] transition disabled:opacity-50"
         >
           {saving ? "저장 중..." : "기업정보 저장"}
         </button>

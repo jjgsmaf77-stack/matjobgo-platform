@@ -97,12 +97,12 @@ export default function StudentProfilePage() {
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">소속 고등학교 *</label>
             <input value={form.school} onChange={(e) => setForm({ ...form, school: e.target.value })}
-              className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none" required />
+              className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none" required />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">학년</label>
             <select value={form.grade} onChange={(e) => setForm({ ...form, grade: e.target.value })}
-              className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none">
+              className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none">
               <option value="">선택</option>
               <option value="1">1학년</option>
               <option value="2">2학년</option>
@@ -119,8 +119,8 @@ export default function StudentProfilePage() {
               <button key={field} type="button" onClick={() => toggleField(field)}
                 className={`px-3 py-1.5 rounded-full text-sm border transition ${
                   form.desiredField.includes(field)
-                    ? "bg-orange-600 text-white border-orange-600"
-                    : "bg-white text-gray-600 border-gray-300 hover:border-orange-400"
+                    ? "bg-[#DC2626] text-white border-[#DC2626]"
+                    : "bg-white text-gray-600 border-gray-300 hover:border-[#EF4444]"
                 }`}>{field}</button>
             ))}
           </div>
@@ -129,7 +129,7 @@ export default function StudentProfilePage() {
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">희망 근무 지역</label>
           <input value={form.desiredLocation} onChange={(e) => setForm({ ...form, desiredLocation: e.target.value })}
-            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
             placeholder="예: 전주, 군산, 익산 등" />
         </div>
 
@@ -137,14 +137,14 @@ export default function StudentProfilePage() {
           <label className="block text-sm font-medium text-gray-700 mb-1">자기소개서</label>
           <textarea value={form.introduction}
             onChange={(e) => setForm({ ...form, introduction: e.target.value })} rows={8}
-            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none resize-none"
+            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none resize-none"
             placeholder="자신의 강점, 조리 분야에 대한 열정, 목표 등을 자유롭게 작성해주세요" />
         </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">보유 기술/자격증</label>
           <input value={form.skills} onChange={(e) => setForm({ ...form, skills: e.target.value })}
-            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
             placeholder="예: 한식조리기능사, 양식조리기능사, 위생사 등" />
         </div>
 
@@ -152,7 +152,7 @@ export default function StudentProfilePage() {
           <label className="block text-sm font-medium text-gray-700 mb-1">경력/경험</label>
           <textarea value={form.experience}
             onChange={(e) => setForm({ ...form, experience: e.target.value })} rows={3}
-            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none resize-none"
+            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none resize-none"
             placeholder="실습, 아르바이트, 대회 경험 등" />
         </div>
 
@@ -166,12 +166,12 @@ export default function StudentProfilePage() {
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">포트폴리오 URL</label>
           <input value={form.portfolioUrl} onChange={(e) => setForm({ ...form, portfolioUrl: e.target.value })}
-            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
             placeholder="https://" />
         </div>
 
         <button type="submit" disabled={saving}
-          className="w-full bg-orange-600 text-white py-3 rounded-xl font-bold hover:bg-orange-700 transition disabled:opacity-50">
+          className="w-full bg-[#DC2626] text-white py-3 rounded-xl font-bold hover:bg-[#991B1B] transition disabled:opacity-50">
           {saving ? "저장 중..." : "프로필 저장"}
         </button>
       </form>

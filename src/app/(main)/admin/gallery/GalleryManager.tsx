@@ -59,7 +59,7 @@ export default function GalleryManager({
     <div className="space-y-8">
       <div className="bg-white rounded-2xl border p-6">
         <h2 className="font-bold text-gray-900 mb-4">새 사진 업로드</h2>
-        <label className="block border-2 border-dashed border-gray-300 rounded-xl p-8 text-center cursor-pointer hover:border-orange-400 hover:bg-orange-50 transition">
+        <label className="block border-2 border-dashed border-gray-300 rounded-xl p-8 text-center cursor-pointer hover:border-[#EF4444] hover:bg-[#FEF2F2] transition">
           <input
             type="file"
             accept="image/jpeg,image/png,image/webp"
@@ -68,8 +68,8 @@ export default function GalleryManager({
             disabled={uploading}
             className="hidden"
           />
-          <div className="inline-flex items-center justify-center w-12 h-12 bg-orange-100 rounded-2xl mb-3">
-            <svg className="w-6 h-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
+          <div className="inline-flex items-center justify-center w-12 h-12 bg-[#FEE2E2] rounded-2xl mb-3">
+            <svg className="w-6 h-6 text-[#DC2626]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
               <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
               <circle cx="12" cy="13" r="4" />
             </svg>

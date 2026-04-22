@@ -26,7 +26,7 @@ export default function ApplyButton({
   if (!isLoggedIn) {
     return (
       <Link href="/login"
-        className="inline-block bg-orange-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-orange-700 transition">
+        className="inline-block bg-[#DC2626] text-white px-8 py-3 rounded-xl font-bold hover:bg-[#991B1B] transition">
         로그인 후 지원하기
       </Link>
     );
@@ -69,7 +69,7 @@ export default function ApplyButton({
     <div>
       {!showForm ? (
         <button onClick={() => setShowForm(true)}
-          className="bg-orange-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-orange-700 transition">
+          className="bg-[#DC2626] text-white px-8 py-3 rounded-xl font-bold hover:bg-[#991B1B] transition">
           지원하기
         </button>
       ) : (
@@ -78,12 +78,12 @@ export default function ApplyButton({
             value={coverLetter}
             onChange={(e) => setCoverLetter(e.target.value)}
             rows={5}
-            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none resize-none"
+            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none resize-none"
             placeholder="지원 동기를 작성해주세요 (선택사항)"
           />
           <div className="flex gap-3">
             <button onClick={handleApply} disabled={loading}
-              className="bg-orange-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-orange-700 transition disabled:opacity-50">
+              className="bg-[#DC2626] text-white px-6 py-3 rounded-xl font-bold hover:bg-[#991B1B] transition disabled:opacity-50">
               {loading ? "지원 중..." : "지원 제출"}
             </button>
             <button onClick={() => setShowForm(false)}

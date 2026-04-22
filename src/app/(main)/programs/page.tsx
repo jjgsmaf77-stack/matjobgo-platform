@@ -14,11 +14,11 @@ const CATEGORY_LABELS: Record<string, string> = {
 const STATUS_META: Record<string, { label: string; cls: string }> = {
   UPCOMING: {
     label: "예정",
-    cls: "bg-[#eef0ff] text-[#1428A0] border-[#1428A0]/10",
+    cls: "bg-[#FEF2F2] text-[#DC2626] border-[#DC2626]/10",
   },
   ONGOING: {
     label: "진행 중",
-    cls: "bg-[#1428A0] text-white border-[#1428A0]",
+    cls: "bg-[#DC2626] text-white border-[#DC2626]",
   },
   COMPLETED: {
     label: "완료",
@@ -89,22 +89,26 @@ export default async function ProgramsPage() {
   ];
 
   return (
-    <div className="bg-white">
-      {/* 헤더 영역 */}
-      <section className="bg-[#0a0a0a] relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#0d1340] to-[#0a0a0a]" />
-        <div className="relative max-w-[1440px] mx-auto px-8 py-20 md:py-24">
-          <p className="text-[#7a8fff] text-[12px] font-bold tracking-[0.25em] uppercase mb-5">
-            Programs
-          </p>
-          <h1 className="text-white text-[40px] md:text-[56px] font-bold leading-[1.1] tracking-tight">
-            맛JobGO
-            <br />
-            교육 프로그램
+    <div className="bg-[#FFFBF5]">
+      {/* 헤더 - Research 페이지와 동일 구조 */}
+      <section className="relative bg-white border-b border-[#DC2626]/10 overflow-hidden">
+        <div className="absolute top-0 right-0 w-40 md:w-64 h-40 md:h-64 bg-[#DC2626]" />
+        <div className="absolute top-0 right-40 md:right-64 w-2 md:w-3 h-40 md:h-64 bg-[#D4A574]" />
+        <div className="relative max-w-[1440px] mx-auto px-8 pt-20 md:pt-28 pb-16 md:pb-20">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-8 h-px bg-[#D4A574]" />
+            <p className="text-[#B8923E] text-[12px] font-bold tracking-[0.35em] uppercase">
+              Programs · 교육 프로그램
+            </p>
+          </div>
+          <h1 className="font-sans-ko text-[40px] md:text-[64px] font-black text-[#991B1B] leading-[1.05] tracking-tight max-w-3xl">
+            실전 기반의<br />
+            <span className="text-[#DC2626]">전문 조리 교육</span>
           </h1>
-          <p className="text-white/50 text-[15px] mt-5 max-w-xl">
-            호원대학교 RISE사업단이 직업계고 학생과 함께 만든
-            <br />네 개의 프로그램 트랙
+          <p className="text-[#44403C] text-[16px] md:text-[18px] leading-[1.8] mt-6 max-w-2xl">
+            호원대학교 RISE사업단이 <span className="font-bold text-[#991B1B]">전북 직업계고 학생</span>과 함께 만든
+            <span className="font-bold text-[#991B1B]"> 네 개의 프로그램 트랙</span>.
+            실제 외식업체 메뉴 기반 교육부터 지역 봉사까지 다양한 경험을 제공합니다.
           </p>
         </div>
       </section>
@@ -118,10 +122,10 @@ export default async function ProgramsPage() {
                 key={p.step}
                 className="bg-white p-10 md:p-12 hover:bg-[#f6f6f6] transition-colors duration-300"
               >
-                <div className="text-[11px] font-bold text-[#1428A0] tracking-[0.25em] mb-5">
+                <div className="text-[11px] font-bold text-[#DC2626] tracking-[0.25em] mb-5">
                   {p.step}
                 </div>
-                <h3 className="text-[24px] font-bold text-black mb-3 tracking-tight">
+                <h3 className="font-sans-ko text-[24px] font-bold text-[#991B1B] mb-3 tracking-tight">
                   {p.title}
                 </h3>
                 <p className="text-[14px] text-black/50 leading-relaxed mb-6">
@@ -133,9 +137,9 @@ export default async function ProgramsPage() {
                       key={b}
                       className="flex items-center gap-3 text-[13px] text-black/60"
                     >
-                      <div className="w-4 h-4 rounded-full bg-[#eef0ff] flex items-center justify-center shrink-0">
+                      <div className="w-4 h-4 rounded-full bg-[#FEF2F2] flex items-center justify-center shrink-0">
                         <svg
-                          className="w-2.5 h-2.5 text-[#1428A0]"
+                          className="w-2.5 h-2.5 text-[#DC2626]"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
@@ -164,10 +168,10 @@ export default async function ProgramsPage() {
           <div className="max-w-[1440px] mx-auto px-8 py-20 md:py-24">
             <div className="flex items-end justify-between mb-10 flex-wrap gap-4">
               <div>
-                <p className="text-[#1428A0] text-[12px] font-bold tracking-[0.25em] uppercase mb-3">
+                <p className="text-[#DC2626] text-[12px] font-bold tracking-[0.25em] uppercase mb-3">
                   Gallery
                 </p>
-                <h2 className="text-[28px] md:text-[36px] font-bold text-black leading-tight tracking-tight">
+                <h2 className="font-sans-ko text-[28px] md:text-[36px] font-bold text-[#991B1B] leading-tight tracking-tight">
                   교육 결과물
                 </h2>
                 <p className="text-black/40 text-[14px] mt-2">
@@ -205,10 +209,10 @@ export default async function ProgramsPage() {
         <section className="bg-white">
           <div className="max-w-[1440px] mx-auto px-8 py-20 md:py-24">
             <div className="mb-10">
-              <p className="text-[#1428A0] text-[12px] font-bold tracking-[0.25em] uppercase mb-3">
+              <p className="text-[#DC2626] text-[12px] font-bold tracking-[0.25em] uppercase mb-3">
                 Timeline
               </p>
-              <h2 className="text-[28px] md:text-[36px] font-bold text-black leading-tight tracking-tight">
+              <h2 className="font-sans-ko text-[28px] md:text-[36px] font-bold text-[#991B1B] leading-tight tracking-tight">
                 프로그램 일정
               </h2>
               <p className="text-black/40 text-[14px] mt-2">
@@ -233,12 +237,12 @@ export default async function ProgramsPage() {
                       >
                         {meta.label}
                       </span>
-                      <span className="text-[11px] font-bold text-[#1428A0] tracking-[0.2em] uppercase">
+                      <span className="text-[11px] font-bold text-[#DC2626] tracking-[0.2em] uppercase">
                         {catLabel}
                       </span>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-bold text-black text-[17px] md:text-[18px] tracking-tight">
+                      <h3 className="font-bold text-[#991B1B] text-[17px] md:text-[18px] tracking-tight">
                         {program.title}
                       </h3>
                       {program.description && (

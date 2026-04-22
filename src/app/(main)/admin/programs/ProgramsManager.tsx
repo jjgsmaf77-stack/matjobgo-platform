@@ -104,12 +104,12 @@ export default function ProgramsManager({
             onChange={(e) => setForm({ ...form, title: e.target.value })}
             placeholder="프로그램 제목"
             required
-            className="px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none sm:col-span-2"
+            className="px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none sm:col-span-2"
           />
           <select
             value={form.category}
             onChange={(e) => setForm({ ...form, category: e.target.value })}
-            className="px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+            className="px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
           >
             {CATEGORIES.map((c) => (
               <option key={c.value} value={c.value}>
@@ -120,7 +120,7 @@ export default function ProgramsManager({
           <select
             value={form.status}
             onChange={(e) => setForm({ ...form, status: e.target.value })}
-            className="px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+            className="px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
           >
             {STATUSES.map((s) => (
               <option key={s.value} value={s.value}>
@@ -132,13 +132,13 @@ export default function ProgramsManager({
             value={form.schedule}
             onChange={(e) => setForm({ ...form, schedule: e.target.value })}
             placeholder="일정 (예: 2026년 5~6월)"
-            className="px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+            className="px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
           />
           <input
             value={form.location}
             onChange={(e) => setForm({ ...form, location: e.target.value })}
             placeholder="장소"
-            className="px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+            className="px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
           />
           <input
             type="number"
@@ -147,7 +147,7 @@ export default function ProgramsManager({
               setForm({ ...form, maxParticipants: e.target.value })
             }
             placeholder="모집 인원"
-            className="px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+            className="px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
           />
           <textarea
             value={form.description}
@@ -156,13 +156,13 @@ export default function ProgramsManager({
             }
             placeholder="프로그램 설명"
             rows={3}
-            className="px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none resize-none sm:col-span-2"
+            className="px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none resize-none sm:col-span-2"
           />
         </div>
         <button
           type="submit"
           disabled={saving}
-          className="block w-full bg-orange-600 text-white py-2.5 rounded-xl font-medium hover:bg-orange-700 transition disabled:opacity-50"
+          className="block w-full bg-[#DC2626] text-white py-2.5 rounded-xl font-medium hover:bg-[#991B1B] transition disabled:opacity-50"
         >
           {saving ? "등록 중..." : "프로그램 등록"}
         </button>
@@ -185,7 +185,7 @@ export default function ProgramsManager({
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap mb-1.5">
-                        <span className="bg-orange-100 text-orange-700 px-2 py-0.5 rounded text-xs font-medium">
+                        <span className="bg-[#FEE2E2] text-[#991B1B] px-2 py-0.5 rounded text-xs font-medium">
                           {cat?.label || p.category}
                         </span>
                         <select

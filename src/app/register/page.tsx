@@ -88,11 +88,11 @@ function RegisterForm() {
       <div className="max-w-lg mx-auto">
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl flex items-center justify-center text-white font-bold text-xl">
+            <div className="w-12 h-12 bg-[#DC2626] rounded-xl flex items-center justify-center text-white font-bold text-xl">
               맛
             </div>
             <span className="text-2xl font-bold text-gray-900">
-              맛<span className="text-orange-600">Job</span>GO
+              맛<span className="text-[#DC2626]">Job</span>GO
             </span>
           </Link>
           <h1 className="text-2xl font-bold text-gray-900">회원가입</h1>
@@ -105,7 +105,7 @@ function RegisterForm() {
             onClick={() => setRole("STUDENT")}
             className={`flex-1 py-4 rounded-xl font-bold text-center border-2 transition flex flex-col items-center gap-1.5 ${
               role === "STUDENT"
-                ? "border-orange-600 bg-orange-50 text-orange-700"
+                ? "border-[#DC2626] bg-[#FEF2F2] text-[#991B1B]"
                 : "border-gray-200 bg-white text-gray-500 hover:border-gray-300"
             }`}
           >
@@ -119,7 +119,7 @@ function RegisterForm() {
             onClick={() => setRole("COMPANY")}
             className={`flex-1 py-4 rounded-xl font-bold text-center border-2 transition flex flex-col items-center gap-1.5 ${
               role === "COMPANY"
-                ? "border-orange-600 bg-orange-50 text-orange-700"
+                ? "border-[#DC2626] bg-[#FEF2F2] text-[#991B1B]"
                 : "border-gray-200 bg-white text-gray-500 hover:border-gray-300"
             }`}
           >
@@ -142,31 +142,31 @@ function RegisterForm() {
             <div className="col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-1">이름 *</label>
               <input name="name" value={formData.name} onChange={handleChange} required
-                className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+                className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
                 placeholder={role === "STUDENT" ? "학생 이름" : "담당자 이름"} />
             </div>
             <div className="col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-1">이메일 *</label>
               <input name="email" type="email" value={formData.email} onChange={handleChange} required
-                className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+                className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
                 placeholder="example@email.com" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">비밀번호 *</label>
               <input name="password" type="password" value={formData.password} onChange={handleChange} required
-                className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+                className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
                 placeholder="6자 이상" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">비밀번호 확인 *</label>
               <input name="passwordConfirm" type="password" value={formData.passwordConfirm} onChange={handleChange} required
-                className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+                className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
                 placeholder="비밀번호 확인" />
             </div>
             <div className="col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-1">연락처</label>
               <input name="phone" value={formData.phone} onChange={handleChange}
-                className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+                className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
                 placeholder="010-0000-0000" />
             </div>
           </div>
@@ -180,7 +180,7 @@ function RegisterForm() {
                   onClick={() => setStudentType("HIGH_SCHOOL")}
                   className={`flex-1 py-3 rounded-xl text-sm font-semibold border-2 transition ${
                     studentType === "HIGH_SCHOOL"
-                      ? "border-orange-600 bg-orange-50 text-orange-700"
+                      ? "border-[#DC2626] bg-[#FEF2F2] text-[#991B1B]"
                       : "border-gray-200 bg-white text-gray-500 hover:border-gray-300"
                   }`}>
                   고등학생 (직업계고)
@@ -189,7 +189,7 @@ function RegisterForm() {
                   onClick={() => setStudentType("UNIVERSITY")}
                   className={`flex-1 py-3 rounded-xl text-sm font-semibold border-2 transition ${
                     studentType === "UNIVERSITY"
-                      ? "border-orange-600 bg-orange-50 text-orange-700"
+                      ? "border-[#DC2626] bg-[#FEF2F2] text-[#991B1B]"
                       : "border-gray-200 bg-white text-gray-500 hover:border-gray-300"
                   }`}>
                   대학생 (호원대)
@@ -201,21 +201,21 @@ function RegisterForm() {
                     {studentType === "UNIVERSITY" ? "소속 대학교" : "소속 고등학교"} *
                   </label>
                   <input name="school" value={formData.school} onChange={handleChange} required
-                    className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+                    className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
                     placeholder={studentType === "UNIVERSITY" ? "예: 호원대학교" : "예: 진경여자고등학교"} />
                 </div>
                 {studentType === "UNIVERSITY" && (
                   <div className="col-span-2">
                     <label className="block text-sm font-medium text-gray-700 mb-1">전공</label>
                     <input name="major" value={formData.major} onChange={handleChange}
-                      className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+                      className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
                       placeholder="예: 호텔조리학과" />
                   </div>
                 )}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">학년</label>
                   <select name="grade" value={formData.grade} onChange={handleChange}
-                    className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none">
+                    className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none">
                     <option value="">선택</option>
                     <option value="1">1학년</option>
                     <option value="2">2학년</option>
@@ -232,8 +232,8 @@ function RegisterForm() {
                     <button key={field} type="button" onClick={() => toggleField(field)}
                       className={`px-3 py-1.5 rounded-full text-sm border transition ${
                         formData.desiredField.includes(field)
-                          ? "bg-orange-600 text-white border-orange-600"
-                          : "bg-white text-gray-600 border-gray-300 hover:border-orange-400"
+                          ? "bg-[#DC2626] text-white border-[#DC2626]"
+                          : "bg-white text-gray-600 border-gray-300 hover:border-[#EF4444]"
                       }`}>
                       {field}
                     </button>
@@ -250,20 +250,20 @@ function RegisterForm() {
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">업체명 *</label>
                 <input name="companyName" value={formData.companyName} onChange={handleChange} required
-                  className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+                  className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
                   placeholder="업체명을 입력하세요" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">사업자등록번호</label>
                   <input name="businessNumber" value={formData.businessNumber} onChange={handleChange}
-                    className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+                    className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
                     placeholder="000-00-00000" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">업종</label>
                   <select name="industry" value={formData.industry} onChange={handleChange}
-                    className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none">
+                    className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none">
                     <option value="">선택</option>
                     {CULINARY_FIELDS.map((f) => <option key={f} value={f}>{f}</option>)}
                   </select>
@@ -272,26 +272,26 @@ function RegisterForm() {
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">소재지</label>
                 <input name="address" value={formData.address} onChange={handleChange}
-                  className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+                  className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none"
                   placeholder="전북특별자치도 전주시..." />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">기업 소개</label>
                 <textarea name="description" value={formData.description} onChange={handleChange} rows={3}
-                  className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none resize-none"
+                  className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none resize-none"
                   placeholder="기업에 대해 간단히 소개해주세요" />
               </div>
             </div>
           )}
 
           <button type="submit" disabled={loading}
-            className="w-full bg-orange-600 text-white py-3 rounded-xl font-bold hover:bg-orange-700 transition disabled:opacity-50">
+            className="w-full bg-[#DC2626] text-white py-3 rounded-xl font-bold hover:bg-[#991B1B] transition disabled:opacity-50">
             {loading ? "가입 중..." : "회원가입"}
           </button>
 
           <p className="text-center text-sm text-gray-500">
             이미 계정이 있으신가요?{" "}
-            <Link href="/login" className="text-orange-600 font-medium hover:underline">로그인</Link>
+            <Link href="/login" className="text-[#DC2626] font-medium hover:underline">로그인</Link>
           </p>
         </form>
       </div>

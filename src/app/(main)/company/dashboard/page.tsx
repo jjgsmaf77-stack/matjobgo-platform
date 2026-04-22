@@ -57,7 +57,7 @@ export default async function CompanyDashboard() {
             기업정보 수정
           </Link>
           <Link href="/company/jobs/new"
-            className="bg-orange-600 text-white px-5 py-2.5 rounded-xl font-medium hover:bg-orange-700 transition">
+            className="bg-[#DC2626] text-white px-5 py-2.5 rounded-xl font-medium hover:bg-[#991B1B] transition">
             + 채용공고 등록
           </Link>
         </div>
@@ -66,7 +66,7 @@ export default async function CompanyDashboard() {
       {/* 요약 카드 */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         <div className="bg-white rounded-xl border p-5">
-          <div className="text-2xl font-bold text-orange-600">{jobPostings.length}</div>
+          <div className="text-2xl font-bold text-[#DC2626]">{jobPostings.length}</div>
           <div className="text-sm text-gray-500 mt-1">등록 공고</div>
         </div>
         <div className="bg-white rounded-xl border p-5">
@@ -88,7 +88,7 @@ export default async function CompanyDashboard() {
         <div className="lg:col-span-2 bg-white rounded-2xl border p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-bold text-gray-900">채용공고 관리</h2>
-            <Link href="/company/jobs/new" className="text-orange-600 text-sm font-medium hover:underline">
+            <Link href="/company/jobs/new" className="text-[#DC2626] text-sm font-medium hover:underline">
               + 새 공고
             </Link>
           </div>
@@ -102,11 +102,11 @@ export default async function CompanyDashboard() {
                 <div key={job.id} className="bg-gray-50 rounded-xl p-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <Link href={`/jobs/${job.id}`} className="font-medium text-gray-900 hover:text-orange-600">
+                      <Link href={`/jobs/${job.id}`} className="font-medium text-gray-900 hover:text-[#DC2626]">
                         {job.title}
                       </Link>
                       <div className="flex items-center gap-3 mt-1 text-sm text-gray-500">
-                        <span className="bg-orange-100 text-orange-700 px-2 py-0.5 rounded text-xs">{job.field}</span>
+                        <span className="bg-[#FEE2E2] text-[#991B1B] px-2 py-0.5 rounded text-xs">{job.field}</span>
                         <span>지원 {job._count.applications}건</span>
                       </div>
                     </div>
@@ -141,7 +141,7 @@ export default async function CompanyDashboard() {
                       <p className="text-sm text-gray-500">{match.student.school}</p>
                     </div>
                     <div className="text-right">
-                      <div className="text-lg font-bold text-orange-600">{Math.round(match.matchScore)}%</div>
+                      <div className="text-lg font-bold text-[#DC2626]">{Math.round(match.matchScore)}%</div>
                       <div className="text-xs text-gray-400">매칭률</div>
                     </div>
                   </div>
@@ -150,7 +150,7 @@ export default async function CompanyDashboard() {
             </div>
           )}
           <Link href="/company/students"
-            className="block text-center mt-4 text-orange-600 font-medium text-sm hover:underline">
+            className="block text-center mt-4 text-[#DC2626] font-medium text-sm hover:underline">
             전체 학생 탐색 →
           </Link>
         </div>

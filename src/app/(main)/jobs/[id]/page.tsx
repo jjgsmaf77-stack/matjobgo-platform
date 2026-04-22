@@ -31,7 +31,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
       <div className="bg-white rounded-2xl border p-8">
         <div className="flex items-start justify-between mb-6">
           <div>
-            <span className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-medium">
+            <span className="bg-[#FEE2E2] text-[#991B1B] px-3 py-1 rounded-full text-sm font-medium">
               {job.field}
             </span>
             <h1 className="text-3xl font-bold text-gray-900 mt-3">{job.title}</h1>
@@ -88,7 +88,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
           <h2 className="text-xl font-bold text-gray-900 mb-4">기업 정보</h2>
           <div className="bg-gray-50 rounded-xl p-6">
             <h3 className="font-bold text-lg">{job.company.companyName}</h3>
-            {job.company.industry && <p className="text-sm text-orange-600 mt-1">{job.company.industry}</p>}
+            {job.company.industry && <p className="text-sm text-[#DC2626] mt-1">{job.company.industry}</p>}
             {job.company.description && <p className="text-gray-600 mt-2">{job.company.description}</p>}
             {job.company.address && (
               <p className="text-sm text-gray-500 mt-2 inline-flex items-center gap-1">
