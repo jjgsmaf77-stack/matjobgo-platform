@@ -88,8 +88,8 @@ export default async function Home() {
             <div className="w-8 h-px bg-[#D4A574]" />
           </div>
 
-          {/* 맛 JOB GO 초대형 타이포 - 레드 계조로 깊이감 */}
-          <h1 className="font-sans-ko font-black leading-[0.9] tracking-[-0.05em] flex flex-wrap items-center justify-center gap-x-6 md:gap-x-12 text-[22vw] md:text-[200px] lg:text-[240px] xl:text-[280px]">
+          {/* 맛 JOB GO 초대형 타이포 - 반응형 */}
+          <h1 className="font-sans-ko font-black leading-[0.9] tracking-[-0.05em] flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-5 md:gap-x-8 lg:gap-x-12 text-[18vw] sm:text-[16vw] md:text-[140px] lg:text-[200px] xl:text-[260px] px-2">
             <span className="text-[#991B1B]">맛</span>
             <span className="text-[#DC2626]">JOB</span>
             <span className="text-[#991B1B]">GO</span>

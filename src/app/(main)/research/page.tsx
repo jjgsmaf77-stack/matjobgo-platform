@@ -94,14 +94,14 @@ export default function ResearchPage() {
       <section className="relative bg-white border-b border-[#DC2626]/10 overflow-hidden">
         <div className="absolute top-0 right-0 w-40 md:w-64 h-40 md:h-64 bg-[#DC2626]" />
         <div className="absolute top-0 right-40 md:right-64 w-2 md:w-3 h-40 md:h-64 bg-[#D4A574]" />
-        <div className="relative max-w-[1440px] mx-auto px-8 pt-20 md:pt-28 pb-16 md:pb-20">
+        <div className="relative max-w-[1440px] mx-auto px-5 md:px-8 pt-14 md:pt-28 pb-12 md:pb-20">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-8 h-px bg-[#D4A574]" />
             <p className="text-[#B8923E] text-[12px] font-bold tracking-[0.35em] uppercase">
               Research · 정책연구
             </p>
           </div>
-          <h1 className="font-sans-ko text-[40px] md:text-[64px] font-black text-[#991B1B] leading-[1.05] tracking-tight max-w-3xl">
+          <h1 className="font-sans-ko text-[30px] sm:text-[38px] md:text-[52px] lg:text-[64px] font-black text-[#991B1B] leading-[1.05] tracking-tight max-w-3xl">
             <span className="text-[#DC2626]">데이터</span>로 증명하는<br />
             지역혁신의 근거
           </h1>
