@@ -1,37 +1,26 @@
 import type { NextConfig } from "next";
 
+// Next.js 16.2.3 기준 (eslint 옵션 제거됨)
 const nextConfig: NextConfig = {
-  // Vercel 배포 호환
+  // Vercel 배포 호환 (Vercel은 자체 output, 로컬은 standalone)
   output: process.env.VERCEL ? undefined : "standalone",
 
-  // 이미지 최적화 외부 허용
+  // 이미지 외부 도메인 허용
   images: {
-    remotePatterns: [
-      { protocol: "https", hostname: "**" },
-    ],
-    // 업로드 이미지는 public 경로 그대로 서빙
+    remotePatterns: [{ protocol: "https", hostname: "**" }],
   },
 
-  // 프로덕션 빌드 시 lint 오류가 warnings 면 통과
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-
-  // 프로덕션 빌드 시 타입 에러는 체크하되 non-fatal
-  typescript: {
-    ignoreBuildErrors: false,
-  },
-
-  // 서버 컴포넌트 외부 패키지
+  // 서버 컴포넌트 외부 패키지 (번들 제외)
   serverExternalPackages: [
     "@prisma/adapter-better-sqlite3",
     "@prisma/adapter-libsql",
     "better-sqlite3",
   ],
 
-  // Vercel / Netlify serverless 번들에 dev.db · prisma 클라이언트 포함
+  // 서버리스 번들에 dev.db · Prisma 클라이언트 포함
+  // 키는 route path (picomatch) - "/*" 는 모든 라우트
   outputFileTracingIncludes: {
-    "/**/*": [
+    "/*": [
       "./prisma/dev.db",
       "./prisma/schema.prisma",
       "./src/generated/prisma/**/*",
