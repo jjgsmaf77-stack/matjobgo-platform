@@ -2,6 +2,7 @@ import Link from "next/link";
 import { readdir } from "fs/promises";
 import path from "path";
 import { Icon } from "@/components/Icon";
+import MatdamFloatingButton from "@/components/MatdamFloatingButton";
 
 async function getGalleryImages(): Promise<string[]> {
   try {
@@ -108,7 +109,7 @@ export default async function Home() {
             호원대학교와 전북 지역 외식산업을 연결하는<br />
             AI 기반 스마트 인재 매칭 플랫폼
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center mt-10 md:mt-12">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mt-10 md:mt-12 flex-wrap">
             <Link
               href="/register?role=student"
               className="inline-flex items-center justify-center px-8 py-[14px] bg-[#DC2626] text-white text-[14px] font-bold rounded-full hover:bg-[#991B1B] transition shadow-xl shadow-[#DC2626]/25"
@@ -120,6 +121,18 @@ export default async function Home() {
               className="inline-flex items-center justify-center px-8 py-[14px] bg-white text-[#991B1B] text-[14px] font-bold rounded-full border-2 border-[#991B1B]/15 hover:border-[#DC2626] hover:text-[#DC2626] transition"
             >
               기업 시작하기
+            </Link>
+            <Link
+              href="/matdam"
+              className="group inline-flex items-center justify-center gap-2 px-8 py-[14px] bg-gradient-to-r from-[#D97706] to-[#F59E0B] text-white text-[14px] font-bold rounded-full hover:from-[#B45309] hover:to-[#D97706] transition shadow-xl shadow-[#D97706]/30 relative"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              </svg>
+              맛담 커뮤니티 둘러보기
+              <span className="absolute -top-1.5 -right-1.5 bg-white text-[#D97706] text-[9px] font-black px-1.5 py-0.5 rounded-full leading-none shadow-lg">
+                NEW
+              </span>
             </Link>
           </div>
         </div>
@@ -864,10 +877,13 @@ export default async function Home() {
             </div>
           </div>
           <div className="border-t border-white/8 mt-12 pt-8 text-[12px] text-white/20 text-center">
-            © 2025 맛JobGO. All rights reserved.
+            © 2026 맛JobGO. All rights reserved.
           </div>
         </div>
       </footer>
+
+      {/* 맛담 플로팅 버튼 · 전 페이지 공통 */}
+      <MatdamFloatingButton />
     </div>
   );
 }
