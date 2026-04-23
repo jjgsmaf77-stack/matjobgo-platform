@@ -42,11 +42,16 @@ next-env.d.ts
 
 /src/generated/prisma
 
-# database (dev only)
-*.db
+# database
+# 로컬 개발용 (./dev.db) 는 추적 제외
+/dev.db
+/dev.db-journal
+# WAL / journal 파일은 항상 제외
 *.db-journal
-prisma/dev.db
-prisma/dev.db-journal
+*.db-wal
+*.db-shm
+# prisma/dev.db 는 시드 데이터 포함, 읽기 전용 배포용으로 추적 (명시적 허용)
+!prisma/dev.db
 
 # user uploads (runtime data - keep dir structure via .gitkeep)
 /public/uploads/resumes/*

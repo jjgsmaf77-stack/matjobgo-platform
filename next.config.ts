@@ -23,7 +23,20 @@ const nextConfig: NextConfig = {
   },
 
   // 서버 컴포넌트 외부 패키지
-  serverExternalPackages: ["@prisma/adapter-better-sqlite3", "@prisma/adapter-libsql"],
+  serverExternalPackages: [
+    "@prisma/adapter-better-sqlite3",
+    "@prisma/adapter-libsql",
+    "better-sqlite3",
+  ],
+
+  // Vercel / Netlify serverless 번들에 dev.db · prisma 클라이언트 포함
+  outputFileTracingIncludes: {
+    "/**/*": [
+      "./prisma/dev.db",
+      "./prisma/schema.prisma",
+      "./src/generated/prisma/**/*",
+    ],
+  },
 };
 
 export default nextConfig;
